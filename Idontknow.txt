@@ -1,0 +1,4497 @@
+local players = game:GetService("Players")
+local tweenService = game:GetService("TweenService")
+local userInputService = game:GetService("UserInputService")
+local runService = game:GetService("RunService")
+local v1 = game:GetService("Workspace")
+local httpService = game:GetService("HttpService")
+
+if not game:IsLoaded() then
+  game.Loaded:Wait()
+end
+
+local localPlayer = players.LocalPlayer
+local playerGui = localPlayer:WaitForChild("PlayerGui")
+
+local function f1(p1, p2)
+  local v2, v3 = pcall(function()
+    local v4 = loadstring((game:HttpGet(p1)))
+
+    if type(v4) == "function" then
+      v4()
+    else
+      error(p2 .. " source did not return executable code")
+    end
+  end)
+
+  if not v2 then
+    warn("[MASTERSAM] " .. p2 .. " failed to initialize: " .. tostring(v3))
+  end
+end
+
+f1(
+  "https://raw.githubusercontent.com/SUUUUUS00000/MEGGD-Anti-kick/refs/heads/main/MEGGD%20Best%20Anti-kick.lua",
+  "Anti-kick"
+)
+
+f1(
+  "https://raw.githubusercontent.com/yBloodz/Free-scripts/refs/heads/main/MVSD-DEVICE-SPOOFER",
+  "Device Spoofer"
+)
+
+local v5 = false
+local color = Color3.fromRGB(255, 255, 255)
+local color2 = Color3.fromRGB(150, 150, 170)
+Color3.fromRGB(10, 10, 15)
+local color3 = Color3.fromRGB(15, 15, 22)
+local color4 = Color3.fromRGB(22, 22, 32)
+local color5 = Color3.fromRGB(60, 210, 120)
+local color6 = Color3.fromRGB(45, 180, 95)
+
+local mastersamKeySystem = Instance.new("ScreenGui")
+mastersamKeySystem.Name = "MASTERSAMKeySystem"
+mastersamKeySystem.ResetOnSpawn = false
+mastersamKeySystem.IgnoreGuiInset = true
+mastersamKeySystem.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+mastersamKeySystem.Parent = playerGui
+
+local uiScale = Instance.new("UIScale")
+uiScale.Parent = mastersamKeySystem
+
+local function f2()
+  local currentCamera = workspace.CurrentCamera
+
+  if not currentCamera then
+    return
+  else
+    local viewportSize = currentCamera.ViewportSize
+
+    if viewportSize.X < 600 then
+      uiScale.Scale = math.clamp(viewportSize.X / 560, 0.75, 0.9)
+    else
+      uiScale.Scale = math.clamp(viewportSize.X / 1000, 0.8, 1)
+    end
+
+    return
+  end
+end
+
+f2()
+
+local currentCamera2 = workspace.CurrentCamera
+
+if currentCamera2 then
+  currentCamera2:GetPropertyChangedSignal("ViewportSize"):Connect(f2)
+end
+
+workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
+  local currentCamera3 = workspace.CurrentCamera
+
+  if currentCamera3 then
+    currentCamera3:GetPropertyChangedSignal("ViewportSize"):Connect(f2)
+    f2()
+  end
+end)
+
+local miniLoading = Instance.new("Frame")
+miniLoading.Name = "MiniLoading"
+miniLoading.AnchorPoint = Vector2.new(0.5, 0.5)
+miniLoading.Position = UDim2.fromScale(0.5, 0.5)
+miniLoading.Size = UDim2.fromOffset(260, 120)
+miniLoading.BackgroundColor3 = color3
+miniLoading.BorderSizePixel = 0
+miniLoading.ClipsDescendants = true
+miniLoading.Parent = mastersamKeySystem
+
+local uiCorner = Instance.new("UICorner")
+uiCorner.CornerRadius = UDim.new(0, 14)
+uiCorner.Parent = miniLoading
+
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.fromRGB(60, 60, 85)
+uiStroke.Thickness = 1.5
+uiStroke.Transparency = 0.3
+uiStroke.Parent = miniLoading
+
+local textLabel = Instance.new("TextLabel")
+textLabel.Position = UDim2.fromOffset(25, 24)
+textLabel.Size = UDim2.new(1, -50, 0, 22)
+textLabel.BackgroundTransparency = 1
+textLabel.Text = "M A S T E R S A M"
+textLabel.Font = Enum.Font.BuilderSansBold
+textLabel.TextSize = 17
+textLabel.TextXAlignment = Enum.TextXAlignment.Left
+textLabel.TextColor3 = color
+textLabel.Parent = miniLoading
+
+local textLabel2 = Instance.new("TextLabel")
+textLabel2.Position = UDim2.fromOffset(25, 46)
+textLabel2.Size = UDim2.new(1, -50, 0, 18)
+textLabel2.BackgroundTransparency = 1
+textLabel2.Text = "INITIALIZING..."
+textLabel2.Font = Enum.Font.BuilderSansMedium
+textLabel2.TextSize = 11
+textLabel2.TextXAlignment = Enum.TextXAlignment.Left
+textLabel2.TextColor3 = color2
+textLabel2.Parent = miniLoading
+
+local frame = Instance.new("Frame")
+frame.Position = UDim2.fromOffset(25, 88)
+frame.Size = UDim2.new(1, -50, 0, 6)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 45)
+frame.BorderSizePixel = 0
+frame.Parent = miniLoading
+
+local uiCorner2 = Instance.new("UICorner")
+uiCorner2.CornerRadius = UDim.new(1, 0)
+uiCorner2.Parent = frame
+
+local frame2 = Instance.new("Frame")
+frame2.Size = UDim2.new(0, 0, 1, 0)
+frame2.BackgroundColor3 = color
+frame2.BorderSizePixel = 0
+frame2.Parent = frame
+
+Instance.new("UICorner", frame2).CornerRadius = UDim.new(1, 0)
+
+local uiGradient = Instance.new("UIGradient")
+uiGradient.Color = ColorSequence.new(color5, color6)
+uiGradient.Parent = frame2
+
+local keyWindow = Instance.new("Frame")
+keyWindow.Name = "KeyWindow"
+keyWindow.AnchorPoint = Vector2.new(0.5, 0.5)
+keyWindow.Position = UDim2.fromScale(0.5, 0.5)
+keyWindow.Size = UDim2.fromOffset(350, 280)
+keyWindow.BackgroundColor3 = color3
+keyWindow.BorderSizePixel = 0
+keyWindow.Visible = false
+keyWindow.Parent = mastersamKeySystem
+
+Instance.new("UICorner", keyWindow).CornerRadius = UDim.new(0, 14)
+
+local uiStroke2 = Instance.new("UIStroke")
+uiStroke2.Color = Color3.fromRGB(60, 60, 85)
+uiStroke2.Thickness = 1.5
+uiStroke2.Transparency = 0.3
+uiStroke2.Parent = keyWindow
+
+local dragHeader = Instance.new("Frame")
+dragHeader.Name = "DragHeader"
+dragHeader.Size = UDim2.new(1, 0, 0, 70)
+dragHeader.BackgroundTransparency = 1
+dragHeader.Parent = keyWindow
+
+local textLabel3 = Instance.new("TextLabel")
+textLabel3.Position = UDim2.fromOffset(25, 18)
+textLabel3.Size = UDim2.new(1, -80, 0, 24)
+textLabel3.BackgroundTransparency = 1
+textLabel3.Text = "M A S T E R S A M"
+textLabel3.Font = Enum.Font.BuilderSansBold
+textLabel3.TextSize = 19
+textLabel3.TextXAlignment = Enum.TextXAlignment.Left
+textLabel3.TextColor3 = color
+textLabel3.Parent = dragHeader
+
+local textLabel4 = Instance.new("TextLabel")
+textLabel4.Position = UDim2.fromOffset(25, 42)
+textLabel4.Size = UDim2.new(1, -80, 0, 16)
+textLabel4.BackgroundTransparency = 1
+textLabel4.Text = "KEY SYSTEM"
+textLabel4.Font = Enum.Font.BuilderSansMedium
+textLabel4.TextSize = 10
+textLabel4.TextXAlignment = Enum.TextXAlignment.Left
+textLabel4.TextColor3 = color5
+textLabel4.Parent = dragHeader
+
+local frame3 = Instance.new("Frame")
+frame3.Position = UDim2.fromOffset(25, 72)
+frame3.Size = UDim2.new(1, -50, 0, 1)
+frame3.BackgroundColor3 = Color3.fromRGB(50, 50, 65)
+frame3.BackgroundTransparency = 0.6
+frame3.BorderSizePixel = 0
+frame3.Parent = keyWindow
+
+local frame4 = Instance.new("Frame")
+frame4.Position = UDim2.fromOffset(25, 90)
+frame4.Size = UDim2.new(1, -50, 1, -110)
+frame4.BackgroundTransparency = 1
+frame4.Parent = keyWindow
+
+local frame5 = Instance.new("Frame")
+frame5.Size = UDim2.new(1, 0, 0, 48)
+frame5.BackgroundColor3 = color4
+frame5.BorderSizePixel = 0
+frame5.Parent = frame4
+
+Instance.new("UICorner", frame5).CornerRadius = UDim.new(0, 10)
+
+local uiStroke3 = Instance.new("UIStroke")
+uiStroke3.Color = Color3.fromRGB(60, 60, 80)
+uiStroke3.Transparency = 0.2
+uiStroke3.Parent = frame5
+
+local textBox = Instance.new("TextBox")
+textBox.Position = UDim2.fromOffset(15, 0)
+textBox.Size = UDim2.new(1, -30, 1, 0)
+textBox.BackgroundTransparency = 1
+textBox.Font = Enum.Font.BuilderSansMedium
+textBox.TextSize = 13
+textBox.TextColor3 = color
+textBox.PlaceholderText = "Enter Key"
+textBox.PlaceholderColor3 = Color3.fromRGB(100, 100, 120)
+textBox.ClearTextOnFocus = false
+textBox.Text = ""
+textBox.Parent = frame5
+
+textBox.Focused:Connect(function()
+  tweenService:Create(uiStroke3, TweenInfo.new(0.2), { Color = color5, Transparency = 0 }):Play()
+end)
+
+textBox.FocusLost:Connect(function()
+  tweenService:Create(uiStroke3, TweenInfo.new(0.2), {
+    Color = Color3.fromRGB(60, 60, 80),
+    Transparency = 0.2,
+  }):Play()
+end)
+
+local function f3(name, text, p3, p4)
+  local textButton = Instance.new("TextButton")
+  textButton.Name = name
+  textButton.Position = UDim2.fromOffset(0, p3)
+  textButton.Size = UDim2.new(1, 0, 0, 44)
+  textButton.BackgroundColor3 = p4 and color or color4
+  textButton.BorderSizePixel = 0
+  textButton.Text = ""
+  textButton.AutoButtonColor = false
+  textButton.Parent = frame4
+
+  Instance.new("UICorner", textButton).CornerRadius = UDim.new(0, 10)
+
+  if p4 then
+    local uiGradient2 = Instance.new("UIGradient")
+
+    uiGradient2.Color = ColorSequence.new({
+      ColorSequenceKeypoint.new(0, color5), ColorSequenceKeypoint.new(1, color6),
+    })
+
+    uiGradient2.Parent = textButton
+  else
+    local uiStroke4 = Instance.new("UIStroke")
+    uiStroke4.Color = Color3.fromRGB(65, 65, 85)
+    uiStroke4.Transparency = 0.2
+    uiStroke4.Parent = textButton
+  end
+
+  local textLabel5 = Instance.new("TextLabel")
+  textLabel5.Size = UDim2.new(1, 0, 1, 0)
+  textLabel5.BackgroundTransparency = 1
+  textLabel5.Text = text
+  textLabel5.Font = Enum.Font.BuilderSansBold
+  textLabel5.TextSize = 12
+  textLabel5.TextColor3 = color
+  textLabel5.Parent = textButton
+
+  textButton.MouseEnter:Connect(function()
+    tweenService:Create(textButton, TweenInfo.new(0.2), {
+      Size = UDim2.new(1, 2, 0, 46),
+      Position = UDim2.fromOffset(-1, p3 - 1),
+    }):Play()
+  end)
+
+  textButton.MouseLeave:Connect(function()
+    tweenService:Create(textButton, TweenInfo.new(0.2), {
+      Size = UDim2.new(1, 0, 0, 44),
+      Position = UDim2.fromOffset(0, p3),
+    }):Play()
+  end)
+
+  return textButton, textLabel5
+end
+
+local v6, v7 = f3("VerifyButton", "✓ VERIFY KEY", 62, true)
+local v8, v9 = f3("GetKeyButton", "↗ GET KEY", 118, false)
+
+local function f4(p5, p6)
+  local inputBegan = p6.InputBegan
+  local v10, position, position2
+
+  inputBegan:Connect(function(p7)
+    if p7.UserInputType == Enum.UserInputType.MouseButton1
+      or p7.UserInputType == Enum.UserInputType.Touch then
+      v10 = true
+      position = p7.Position
+      position2 = p5.Position
+    end
+  end)
+
+  p6.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1
+      or input.UserInputType == Enum.UserInputType.Touch then
+      v10 = false
+    end
+  end)
+
+  userInputService.InputChanged:Connect(function(input2)
+    if v10
+      and (input2.UserInputType == Enum.UserInputType.MouseMovement
+        or input2.UserInputType == Enum.UserInputType.Touch) then
+      local v11 = input2.Position - position
+
+      p5.Position = UDim2.new(
+        position2.X.Scale, position2.X.Offset + v11.X, position2.Y.Scale,
+        position2.Y.Offset + v11.Y
+      )
+    end
+  end)
+end
+
+f4(keyWindow, dragHeader)
+
+v8.MouseButton1Click:Connect(function()
+  pcall(function()
+    if setclipboard then
+      setclipboard("@GodsCheat")
+
+      v9.Text = "Copied Link!"
+      v9.TextColor3 = Color3.fromRGB(150, 255, 150)
+
+      task.wait(1.5)
+
+      v9.Text = "GET KEY"
+      v9.TextColor3 = color
+    else
+      v9.Text = "GET KEY"
+      task.wait(1.5)
+      v9.Text = "GET KEY"
+    end
+  end)
+end)
+
+v6.MouseButton1Click:Connect(function()
+  if textBox.Text == "" then
+    v7.Text = "⚠ ENTER GODS KEY"
+    task.wait(1)
+    v7.Text = "✓ VERIFY GODS KEY"
+    return
+  end
+
+  v7.Text = "◌ CHECKING GODS KEY..."
+  task.wait(0.8)
+
+  if textBox.Text == "GODS" then
+    v5 = true
+    v7.Text = "✓ GODS ACCESS GRANTED"
+    task.wait(0.7)
+    mastersamKeySystem:Destroy()
+    -- Show the main GUI after successful key verification
+    if playerVisualizationTool2 then
+      playerVisualizationTool2.Enabled = true
+    end
+  else
+    v7.Text = "X INVALID GODS KEY"
+    task.wait(1)
+    v7.Text = "✓ VERIFY GODS KEY"
+  end
+end)
+
+task.spawn(function()
+  local v12 = {
+    "Initializing Secure System...", "Loading Components...", "Establishing Connection...",
+    "Verifying System Integrity...", "Key System Ready.",
+  }
+
+  for i = 1, #v12 do
+    textLabel2.Text = v12[i]
+
+    tweenService:Create(
+      frame2, TweenInfo.new(0.6, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
+      { Size = UDim2.new(i / #v12, 0, 1, 0) }
+    ):Play()
+
+    task.wait(0.8)
+  end
+
+  task.wait(0.3)
+
+  tweenService:Create(
+    miniLoading, TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.In),
+    { Size = UDim2.fromOffset(200, 80) }
+  ):Play()
+
+  for index, value in ipairs(miniLoading:GetDescendants()) do
+    if value:IsA("TextLabel") then
+      tweenService:Create(value, TweenInfo.new(0.3), { TextTransparency = 1 }):Play()
+    elseif value:IsA("Frame") then
+      tweenService:Create(value, TweenInfo.new(0.3), { BackgroundTransparency = 1 }):Play()
+    elseif value:IsA("UIStroke") then
+      tweenService:Create(value, TweenInfo.new(0.3), { Transparency = 1 }):Play()
+    end
+  end
+
+  tweenService:Create(miniLoading, TweenInfo.new(0.3), { BackgroundTransparency = 1 }):Play()
+  task.wait(0.4)
+  miniLoading:Destroy()
+
+  keyWindow.Visible = true
+  keyWindow.BackgroundTransparency = 1
+  keyWindow.Size = UDim2.fromOffset(320, 250)
+
+  tweenService:Create(
+    keyWindow, TweenInfo.new(0.6, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+    { Size = UDim2.fromOffset(350, 280), BackgroundTransparency = 0 }
+  ):Play()
+end)
+
+local currentCamera4 = v1.CurrentCamera
+
+local v13 = {
+  TrackingEnabled = false,
+  Smoothness = 0.25,
+  AimPart = "Head",
+  FOVEnabled = true,
+  FOVSize = 15,
+  ShowAimButton = false,
+  ESPEnabled = true,
+  BoxESP = true,
+  NameTags = false,
+  HealthBar = false,
+  Distance = false,
+  BoxColor = Color3.fromRGB(255, 80, 80),
+  WallCheck = true,
+  BigHead = false,
+  BigHeadSize = 5,
+  Fly = false,
+  FlySpeed = 10,
+  SpeedHack = false,
+  WalkSpeedValue = 16,
+  NoClip = false,
+  InfiniteJump = false,
+  HitboxExpander = false,
+  HitboxSize = 10,
+  TeleportEnabled = false,
+  TrackingKey = Enum.KeyCode.Z,
+  ViewCameraTP = false,
+  CameraTPActive = false,
+  CameraTPOriginalType = nil,
+  CameraTPOriginalSubject = nil,
+  CameraTPOriginalCFrame = nil,
+  CameraTPSpeed = 140,
+  CameraTPSensitivity = 0.4,
+  CameraTPButtonLocked = false,
+  SpectateEnabled = false,
+  SpectateActive = false,
+  SpectateTarget = nil,
+  DiscordLink = "@GodsCheat",
+  TikTokLink = "https://www.tiktok.com/@nstrscript2",
+  YouTubeLink = "https://www.youtube.com/@s1rcxlotus",
+  UsageWebhook = "https://discord.com/api/webhooks/1545688427112964108/O0gPas2VOGtbf-RukQzsK_GHlW9bpANb6DbO3MHzYgclU8PM4Ve4MhMFvObEeOdPHwkM",
+  SilentAimHK = false,
+  SA2_TargetPart = "Head",
+  SA2_TeamTarget = "Enemies",
+  SA2_Wallcheck = false,
+  SA2_Wallbang = false,
+  SA2_BulletTeleport = false,
+  SA2_HitChance = 100,
+  SA2_HeadshotChance = 100,
+  SA2_FovRadius = 100,
+  SA2_FovVisible = true,
+  SA2_FovTransparency = 0.9,
+  SA2_FovColor = Color3.fromRGB(45, 180, 95),
+  SA2_FovTargetColor = Color3.fromRGB(255, 255, 255),
+  SA2_ThreeSixtyMode = false,
+  SA2_TargetRange = 500,
+  SA2_Prediction = 0,
+  SA2_GetTarget = "Closest",
+  SA2_AimMethods = { "Raycast" },
+  SA2_RemoteNames = { "hit", "bullet", "projectile", "hitscan" },
+  SA2_Key = Enum.KeyCode.R,
+  Triggerbot = false,
+  TriggerbotRate = 100,
+  TriggerbotInterval = 0.01,
+  TriggerbotFOV = 10,
+  TriggerbotFOVVisible = false,
+  TriggerbotFOVColor = Color3.fromRGB(45, 180, 95),
+  TriggerbotFOVTargetColor = Color3.fromRGB(255, 255, 255),
+  TriggerbotFOVTransparency = 0.9,
+}
+
+local v14 = {}
+
+local function f5(p8)
+  if v13.AimPart == "Head" then
+    return p8:FindFirstChild("Head")
+  end
+
+  if v13.AimPart == "Torso" then
+    return p8:FindFirstChild("UpperTorso") or p8:FindFirstChild("Torso")
+      or p8:FindFirstChild("HumanoidRootPart")
+  end
+
+  return p8:FindFirstChild("HumanoidRootPart")
+end
+
+local function f6(p9)
+  if not p9 then
+    return nil
+  else
+    local character = p9.Character
+
+    if not character or not character.Parent then
+      return nil
+    else
+      local humanoid = character:FindFirstChildOfClass("Humanoid")
+      local v15 = not humanoid
+      local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+
+      if v15 or humanoid.Health <= 0 or not humanoidRootPart then
+        return nil
+      end
+
+      return character, humanoid, humanoidRootPart
+    end
+  end
+end
+
+local function f7(p10, p11)
+  local connect = p10:Connect(p11)
+  table.insert(v14, connect)
+  return connect
+end
+
+local function f8(text2)
+  local playerGui2 = localPlayer:FindFirstChildOfClass("PlayerGui")
+  local textLabel6
+
+  if not playerGui2 then
+    return
+  else
+    local playerToolNotifications = playerGui2:FindFirstChild("PlayerToolNotifications")
+
+    if not playerToolNotifications then
+      return
+    else
+      textLabel6 = Instance.new("TextLabel")
+      textLabel6.Size = UDim2.new(0, 260, 0, 40)
+      textLabel6.BackgroundColor3 = Color3.fromRGB(18, 20, 26)
+      textLabel6.BackgroundTransparency = 0.05
+      textLabel6.BorderSizePixel = 0
+      textLabel6.TextColor3 = Color3.fromRGB(240, 243, 250)
+      textLabel6.TextSize = 14
+      textLabel6.Font = Enum.Font.BuilderSansMedium
+      textLabel6.Text = text2
+      textLabel6.Parent = playerToolNotifications
+
+      Instance.new("UICorner", textLabel6).CornerRadius = UDim.new(0, 10)
+
+      local uiStroke5 = Instance.new("UIStroke")
+      uiStroke5.Color = Color3.fromRGB(60, 210, 120)
+      uiStroke5.Transparency = 0.3
+      uiStroke5.Parent = textLabel6
+
+      if playerToolNotifications:FindFirstChildOfClass("UIListLayout") then
+        textLabel6.LayoutOrder = math.floor(os.clock() * 1000)
+      end
+
+      task.delay(2.5, function()
+        if textLabel6.Parent then
+          tweenService:Create(textLabel6, TweenInfo.new(0.25), {
+            BackgroundTransparency = 1,
+            TextTransparency = 1,
+          }):Play()
+
+          task.wait(0.3)
+          textLabel6:Destroy()
+        end
+      end)
+
+      return
+    end
+  end
+end
+
+local v16 = {}
+
+local function f9(p12)
+  if not p12 or p12 == localPlayer then
+    return false
+  end
+
+  return true
+end
+
+local function f10(p13, p14)
+  if not v13.WallCheck then
+    return true
+  else
+    local position3 = currentCamera4.CFrame.Position
+    local position4 = p14.Position
+
+    local raycastParams = RaycastParams.new()
+    raycastParams.FilterType = Enum.RaycastFilterType.Exclude
+    raycastParams.FilterDescendantsInstances = { localPlayer.Character, p13 }
+    raycastParams.IgnoreWater = true
+
+    return v1:Raycast(position3, position4 - position3, raycastParams) == nil
+  end
+end
+
+local function f11(p15)
+  local v17 = currentCamera4.ViewportSize / 2
+  local huge = math.huge
+  local fovSize = p15 or v13.FOVSize
+  local v18
+
+  for index2, value2 in ipairs(players:GetPlayers()) do
+    local v19 = f6(value2)
+
+    if v19 and f9(value2) then
+      local v20 = f5(v19)
+
+      if v20 then
+        local v21, v22 = currentCamera4:WorldToViewportPoint(v20.Position)
+
+        if v22 and v21.Z > 0 then
+          local v23 = v21.X - v17.X
+          local v24 = v21.Y - v17.Y
+          local v25 = math.sqrt(v23 * v23 + v24 * v24)
+
+          if v25 <= fovSize and v25 < huge then
+            if f10(v19, v20) then
+              v18 = value2
+              huge = v25
+            end
+          end
+        end
+      end
+    end
+  end
+
+  return v18
+end
+
+local v26 = 0
+
+local function f12()
+  local v27 = os.clock()
+
+  if v27 - v26 < v13.TriggerbotInterval then
+    return
+  end
+
+  local character2 = localPlayer.Character
+
+  if not character2 then
+    return
+  end
+
+  local tool = character2:FindFirstChildOfClass("Tool")
+
+  if not tool then
+    return
+  end
+
+  v26 = v27
+  pcall(function() tool:Activate() end)
+
+  task.delay(0.03, function()
+    if tool and tool.Parent == character2 then
+      pcall(function() tool:Deactivate() end)
+    end
+  end)
+end
+
+local triggerbotFOV, uiStroke6
+
+f7(runService.Heartbeat, function()
+  if not v5 or not v13.Triggerbot then
+    if triggerbotFOV then
+      triggerbotFOV.Visible = false
+    end
+
+    return
+  else
+    local v28 = triggerbotFOV
+    local v29 = f11(v13.TriggerbotFOV)
+
+    if v28 and uiStroke6 then
+      local currentCamera5 = v1.CurrentCamera
+
+      if currentCamera5 and v13.TriggerbotFOVVisible then
+        local viewportSize2 = currentCamera5.ViewportSize
+
+        triggerbotFOV.Position = UDim2.fromOffset(viewportSize2.X / 2, viewportSize2.Y / 2)
+        triggerbotFOV.Size = UDim2.fromOffset(v13.TriggerbotFOV * 2, v13.TriggerbotFOV * 2)
+        triggerbotFOV.Visible = true
+
+        local v30 = uiStroke6
+        v30.Color = v29 and v13.TriggerbotFOVTargetColor or v13.TriggerbotFOVColor
+
+        uiStroke6.Transparency = 1 - math.clamp(v13.TriggerbotFOVTransparency, 0, 1)
+      else
+        triggerbotFOV.Visible = false
+      end
+    end
+
+    if v29 then
+      f12()
+    end
+
+    return
+  end
+end)
+
+local playerGui3 = localPlayer:WaitForChild("PlayerGui")
+local playerVisualizationTool = playerGui3:FindFirstChild("PlayerVisualizationTool")
+
+if playerVisualizationTool then
+  playerVisualizationTool:Destroy()
+end
+
+local playerVisualizationTool2 = Instance.new("ScreenGui")
+playerVisualizationTool2.Name = "PlayerVisualizationTool"
+playerVisualizationTool2.ResetOnSpawn = false
+playerVisualizationTool2.IgnoreGuiInset = true
+playerVisualizationTool2.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+playerVisualizationTool2.Enabled = false
+playerVisualizationTool2.Parent = playerGui3
+
+triggerbotFOV = Instance.new("Frame")
+triggerbotFOV.Name = "TriggerbotFOV"
+triggerbotFOV.AnchorPoint = Vector2.new(0.5, 0.5)
+triggerbotFOV.BackgroundTransparency = 1
+triggerbotFOV.BorderSizePixel = 0
+triggerbotFOV.Size = UDim2.fromOffset(v13.TriggerbotFOV * 2, v13.TriggerbotFOV * 2)
+triggerbotFOV.Visible = false
+triggerbotFOV.Parent = playerVisualizationTool2
+
+Instance.new("UICorner", triggerbotFOV).CornerRadius = UDim.new(1, 0)
+
+uiStroke6 = Instance.new("UIStroke")
+uiStroke6.Thickness = 1
+uiStroke6.Color = v13.TriggerbotFOVColor
+uiStroke6.Transparency = 1 - v13.TriggerbotFOVTransparency
+uiStroke6.Parent = triggerbotFOV
+
+function f44()
+  playerVisualizationTool2.Enabled = true
+end
+
+local playerToolNotifications2 = Instance.new("Frame")
+playerToolNotifications2.Name = "PlayerToolNotifications"
+playerToolNotifications2.AnchorPoint = Vector2.new(1, 1)
+playerToolNotifications2.Position = UDim2.new(1, -16, 1, -16)
+playerToolNotifications2.Size = UDim2.new(0, 260, 0, 200)
+playerToolNotifications2.BackgroundTransparency = 1
+playerToolNotifications2.Parent = playerVisualizationTool2
+
+local uiListLayout = Instance.new("UIListLayout")
+uiListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
+uiListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
+uiListLayout.Padding = UDim.new(0, 8)
+uiListLayout.Parent = playerToolNotifications2
+
+local fovCircle = Instance.new("Frame")
+fovCircle.Name = "FOVCircle"
+fovCircle.AnchorPoint = Vector2.new(0.5, 0.5)
+fovCircle.BackgroundTransparency = 1
+fovCircle.Size = UDim2.fromOffset(v13.FOVSize * 2, v13.FOVSize * 2)
+fovCircle.Parent = playerVisualizationTool2
+
+local uiCorner3 = Instance.new("UICorner")
+uiCorner3.CornerRadius = UDim.new(1, 0)
+uiCorner3.Parent = fovCircle
+
+local uiStroke7 = Instance.new("UIStroke")
+uiStroke7.Thickness = 1.5
+uiStroke7.Color = Color3.fromRGB(60, 210, 120)
+uiStroke7.Transparency = 0.2
+uiStroke7.Parent = fovCircle
+
+local aimToggle = Instance.new("TextButton")
+aimToggle.Name = "AimToggle"
+aimToggle.AnchorPoint = Vector2.new(0, 1)
+aimToggle.Position = UDim2.new(0, 75, 1, -15)
+aimToggle.Size = UDim2.fromOffset(48, 48)
+
+aimToggle.BackgroundColor3 = v13.TrackingEnabled and Color3.fromRGB(45, 180, 95)
+  or Color3.fromRGB(235, 65, 65)
+
+aimToggle.Text = "AIM"
+aimToggle.TextColor3 = Color3.new(1, 1, 1)
+aimToggle.TextSize = 12
+aimToggle.Font = Enum.Font.BuilderSansBold
+aimToggle.AutoButtonColor = false
+aimToggle.Visible = v13.ShowAimButton
+aimToggle.Parent = playerVisualizationTool2
+
+Instance.new("UICorner", aimToggle).CornerRadius = UDim.new(0, 12)
+local v31 = false
+local v32 = false
+local v33 = false
+local v34 = false
+local position5, position6
+
+f7(aimToggle.InputBegan, function(p16)
+  if v31 then
+    return
+  end
+
+  local connect2
+
+  if p16.UserInputType == Enum.UserInputType.MouseButton1
+    or p16.UserInputType == Enum.UserInputType.Touch then
+    v33 = true
+    v34 = false
+    position5 = p16.Position
+    position6 = aimToggle.Position
+
+    connect2 = nil
+
+    connect2 = p16.Changed:Connect(function()
+      if p16.UserInputState == Enum.UserInputState.End then
+        v33 = false
+        connect2:Disconnect()
+      end
+    end)
+  end
+end)
+
+f7(userInputService.InputChanged, function(p17)
+  if not v31
+    and v33
+    and (p17.UserInputType == Enum.UserInputType.MouseMovement
+      or p17.UserInputType == Enum.UserInputType.Touch) then
+    local v35 = p17.Position - position5
+
+    if math.abs(v35.X) > 4 or math.abs(v35.Y) > 4 then
+      v34 = true
+    end
+
+    local udim = UDim2.new(
+      position6.X.Scale, position6.X.Offset + v35.X, position6.Y.Scale,
+      position6.Y.Offset + v35.Y
+    )
+
+    aimToggle.Position = aimToggle.Position:Lerp(udim, 0.32)
+  end
+end)
+
+local mainWindow = Instance.new("Frame")
+mainWindow.Name = "MainWindow"
+mainWindow.AnchorPoint = Vector2.new(0.5, 0.5)
+mainWindow.Position = UDim2.fromScale(0.5, 0.5)
+mainWindow.Size = UDim2.fromOffset(410, 305)
+mainWindow.BackgroundColor3 = Color3.fromRGB(14, 16, 22)
+mainWindow.BorderSizePixel = 0
+mainWindow.Parent = playerVisualizationTool2
+
+Instance.new("UICorner", mainWindow).CornerRadius = UDim.new(0, 14)
+
+local uiStroke8 = Instance.new("UIStroke")
+uiStroke8.Color = Color3.fromRGB(50, 60, 85)
+uiStroke8.Thickness = 1.2
+uiStroke8.Parent = mainWindow
+
+local uiScale2 = Instance.new("UIScale")
+uiScale2.Scale = 1
+uiScale2.Parent = mainWindow
+
+local frame6 = Instance.new("Frame")
+frame6.Size = UDim2.new(1, 0, 0, 58)
+frame6.BackgroundColor3 = Color3.fromRGB(19, 22, 31)
+frame6.BorderSizePixel = 0
+frame6.Parent = mainWindow
+
+local uiCorner4 = Instance.new("UICorner")
+uiCorner4.CornerRadius = UDim.new(0, 14)
+uiCorner4.Parent = frame6
+
+local frame7 = Instance.new("Frame")
+frame7.Position = UDim2.new(0, 0, 1, -10)
+frame7.Size = UDim2.new(1, 0, 0, 10)
+frame7.BackgroundColor3 = Color3.fromRGB(19, 22, 31)
+frame7.BorderSizePixel = 0
+frame7.Parent = frame6
+
+local textLabel7 = Instance.new("TextLabel")
+textLabel7.BackgroundTransparency = 1
+textLabel7.Position = UDim2.fromOffset(18, 9)
+textLabel7.Size = UDim2.new(1, -80, 0, 24)
+textLabel7.Font = Enum.Font.BuilderSansBold
+textLabel7.Text = "MASTERSAM Hub"
+textLabel7.TextColor3 = Color3.fromRGB(250, 252, 255)
+textLabel7.TextSize = 19
+textLabel7.TextXAlignment = Enum.TextXAlignment.Left
+textLabel7.Parent = frame6
+
+local textLabel8 = Instance.new("TextLabel")
+textLabel8.BackgroundTransparency = 1
+textLabel8.Position = UDim2.fromOffset(19, 32)
+textLabel8.Size = UDim2.new(1, -80, 0, 16)
+textLabel8.Font = Enum.Font.BuilderSans
+textLabel8.Text = "developed by s1rcxlotus"
+textLabel8.TextColor3 = Color3.fromRGB(120, 130, 155)
+textLabel8.TextSize = 11
+textLabel8.TextXAlignment = Enum.TextXAlignment.Left
+textLabel8.Parent = frame6
+
+local hideButton = Instance.new("TextButton")
+hideButton.Name = "HideButton"
+hideButton.AnchorPoint = Vector2.new(1, 0.5)
+hideButton.Position = UDim2.new(1, -14, 0.5, 0)
+hideButton.Size = UDim2.fromOffset(34, 34)
+hideButton.BackgroundColor3 = Color3.fromRGB(26, 30, 42)
+hideButton.Text = "—"
+hideButton.TextColor3 = Color3.fromRGB(220, 225, 240)
+hideButton.TextSize = 17
+hideButton.Font = Enum.Font.BuilderSansBold
+hideButton.AutoButtonColor = false
+hideButton.Active = true
+hideButton.ZIndex = 20
+hideButton.Parent = frame6
+
+Instance.new("UICorner", hideButton).CornerRadius = UDim.new(0, 10)
+local v36 = false
+local position7, position8
+
+f7(frame6.InputBegan, function(p18)
+  local v37 = p18.UserInputType == Enum.UserInputType.MouseButton1
+    or p18.UserInputType == Enum.UserInputType.Touch
+
+  local connect3
+
+  if v37 then
+    v36 = true
+    position7 = p18.Position
+    position8 = mainWindow.Position
+
+    connect3 = nil
+
+    connect3 = p18.Changed:Connect(function()
+      if p18.UserInputState == Enum.UserInputState.End then
+        v36 = false
+        connect3:Disconnect()
+      end
+    end)
+  end
+end)
+
+f7(userInputService.InputChanged, function(p19)
+  if v36
+    and (p19.UserInputType == Enum.UserInputType.MouseMovement
+      or p19.UserInputType == Enum.UserInputType.Touch) then
+    local v38 = p19.Position - position7
+
+    local udim2 = UDim2.new(
+      position8.X.Scale, position8.X.Offset + v38.X, position8.Y.Scale,
+      position8.Y.Offset + v38.Y
+    )
+
+    mainWindow.Position = mainWindow.Position:Lerp(udim2, 0.28)
+  end
+end)
+
+local frame8 = Instance.new("Frame")
+frame8.Position = UDim2.fromOffset(12, 68)
+frame8.Size = UDim2.fromOffset(102, 225)
+frame8.BackgroundTransparency = 1
+frame8.Parent = mainWindow
+
+local uiListLayout2 = Instance.new("UIListLayout")
+uiListLayout2.Padding = UDim.new(0, 8)
+uiListLayout2.Parent = frame8
+
+local scrollingFrame = Instance.new("ScrollingFrame")
+scrollingFrame.Position = UDim2.fromOffset(124, 68)
+scrollingFrame.Size = UDim2.new(1, -136, 1, -78)
+scrollingFrame.BackgroundColor3 = Color3.fromRGB(17, 20, 28)
+scrollingFrame.BorderSizePixel = 0
+scrollingFrame.ClipsDescendants = true
+scrollingFrame.CanvasSize = UDim2.fromOffset(0, 0)
+
+local function f13(text3, p20, fn)
+  local frame9 = Instance.new("Frame")
+  frame9.Size = UDim2.new(1, 0, 0, 42)
+  frame9.BackgroundTransparency = 1
+  frame9.Parent = scrollingFrame
+
+  local textButton2 = Instance.new("TextButton")
+  textButton2.Size = UDim2.new(1, 0, 0, 42)
+  textButton2.BackgroundColor3 = Color3.fromRGB(23, 27, 37)
+  textButton2.BorderSizePixel = 0
+  textButton2.AutoButtonColor = false
+  textButton2.Text = ""
+  textButton2.Parent = frame9
+
+  Instance.new("UICorner", textButton2).CornerRadius = UDim.new(0, 8)
+
+  local frame10 = Instance.new("Frame")
+  frame10.Position = UDim2.fromOffset(10, 12)
+  frame10.Size = UDim2.fromOffset(18, 18)
+  frame10.BackgroundColor3 = p20 and Color3.fromRGB(45, 180, 95) or Color3.fromRGB(38, 43, 56)
+  frame10.BorderSizePixel = 0
+  frame10.Parent = textButton2
+
+  Instance.new("UICorner", frame10).CornerRadius = UDim.new(0, 5)
+
+  local textLabel9 = Instance.new("TextLabel")
+  textLabel9.Size = UDim2.fromScale(1, 1)
+  textLabel9.BackgroundTransparency = 1
+  textLabel9.Text = p20 and "✓" or ""
+  textLabel9.TextColor3 = Color3.new(1, 1, 1)
+  textLabel9.Font = Enum.Font.BuilderSansBold
+  textLabel9.TextSize = 13
+  textLabel9.Parent = frame10
+
+  local textLabel10 = Instance.new("TextLabel")
+  textLabel10.Position = UDim2.fromOffset(38, 0)
+  textLabel10.Size = UDim2.new(1, -46, 1, 0)
+  textLabel10.BackgroundTransparency = 1
+  textLabel10.Text = text3
+  textLabel10.TextColor3 = Color3.fromRGB(220, 225, 235)
+  textLabel10.TextSize = 13
+  textLabel10.Font = Enum.Font.BuilderSansMedium
+  textLabel10.TextXAlignment = Enum.TextXAlignment.Left
+  textLabel10.Parent = textButton2
+
+  local v39 = p20
+
+  f7(textButton2.MouseButton1Click, function()
+    v39 = not v39
+
+    frame10.BackgroundColor3 = v39 and Color3.fromRGB(45, 180, 95)
+      or Color3.fromRGB(38, 43, 56)
+
+    textLabel9.Text = v39 and "✓" or ""
+    fn(v39)
+  end)
+
+  return frame9
+end
+
+scrollingFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
+scrollingFrame.ScrollingDirection = Enum.ScrollingDirection.Y
+scrollingFrame.ScrollBarThickness = 4
+
+local function f14(text4, p21, p22, fn2)
+  local text5 = p22
+
+  local textButton3 = Instance.new("TextButton")
+  textButton3.Size = UDim2.new(1, 0, 0, 42)
+  textButton3.BackgroundColor3 = Color3.fromRGB(23, 27, 37)
+  textButton3.BorderSizePixel = 0
+  textButton3.AutoButtonColor = false
+  textButton3.Text = ""
+  textButton3.Parent = scrollingFrame
+
+  Instance.new("UICorner", textButton3).CornerRadius = UDim.new(0, 8)
+
+  local textLabel11 = Instance.new("TextLabel")
+  textLabel11.Position = UDim2.fromOffset(12, 0)
+  textLabel11.Size = UDim2.new(0.5, 0, 1, 0)
+  textLabel11.BackgroundTransparency = 1
+  textLabel11.Text = text4
+  textLabel11.TextColor3 = Color3.fromRGB(210, 215, 225)
+  textLabel11.TextSize = 12
+  textLabel11.Font = Enum.Font.BuilderSansMedium
+  textLabel11.TextXAlignment = Enum.TextXAlignment.Left
+  textLabel11.Parent = textButton3
+
+  local textLabel12 = Instance.new("TextLabel")
+  textLabel12.Position = UDim2.new(0.4, 0, 0, 0)
+  textLabel12.Size = UDim2.new(0.6, -12, 1, 0)
+  textLabel12.BackgroundTransparency = 1
+  textLabel12.Text = text5
+  textLabel12.TextColor3 = Color3.fromRGB(60, 210, 120)
+  textLabel12.TextSize = 12
+  textLabel12.Font = Enum.Font.BuilderSansBold
+  textLabel12.TextXAlignment = Enum.TextXAlignment.Right
+  textLabel12.Parent = textButton3
+
+  local v40 = false
+  local frame11
+
+  local function f15()
+    if frame11 then
+      frame11:Destroy()
+      frame11 = nil
+    end
+
+    v40 = false
+  end
+
+  f7(textButton3.MouseButton1Click, function()
+    if v40 then
+      f15()
+      return
+    else
+      v40 = true
+
+      frame11 = Instance.new("Frame")
+      frame11.ZIndex = 50
+      frame11.ClipsDescendants = true
+      frame11.BackgroundColor3 = Color3.fromRGB(20, 24, 34)
+      frame11.BorderSizePixel = 0
+      frame11.Parent = playerVisualizationTool2
+
+      Instance.new("UICorner", frame11).CornerRadius = UDim.new(0, 8)
+      local absolutePosition = textButton3.AbsolutePosition
+      local absoluteSize = textButton3.AbsoluteSize
+
+      frame11.Position = UDim2.fromOffset(
+        absolutePosition.X, absolutePosition.Y + absoluteSize.Y + 4
+      )
+
+      frame11.Size = UDim2.fromOffset(absoluteSize.X, math.min(#p21 * 32, 160))
+
+      Instance.new("UIListLayout").Parent = frame11
+
+      for index3, value3 in ipairs(p21) do
+        local v41 = value3
+
+        local textButton4 = Instance.new("TextButton")
+        textButton4.Size = UDim2.new(1, 0, 0, 32)
+        textButton4.BackgroundTransparency = 1
+        textButton4.Text = v41
+        textButton4.TextColor3 = Color3.fromRGB(220, 225, 235)
+        textButton4.TextSize = 12
+        textButton4.Font = Enum.Font.BuilderSansMedium
+        textButton4.ZIndex = 51
+        textButton4.Parent = frame11
+
+        f7(textButton4.MouseButton1Click, function()
+          text5 = v41
+          textLabel12.Text = v41
+          fn2(v41)
+          f15()
+        end)
+      end
+
+      return
+    end
+  end)
+
+  return textButton3
+end
+
+scrollingFrame.ScrollBarImageColor3 = Color3.fromRGB(60, 210, 120)
+
+local function f16(text6, p23, fn3)
+  local textButton5 = Instance.new("TextButton")
+  textButton5.Size = UDim2.new(1, 0, 0, 34)
+  textButton5.BackgroundColor3 = Color3.fromRGB(23, 27, 37)
+  textButton5.BorderSizePixel = 0
+  textButton5.AutoButtonColor = false
+  textButton5.Text = ""
+  textButton5.Parent = scrollingFrame
+
+  Instance.new("UICorner", textButton5).CornerRadius = UDim.new(0, 8)
+
+  local frame12 = Instance.new("Frame")
+  frame12.Position = UDim2.fromOffset(10, 8)
+  frame12.Size = UDim2.fromOffset(18, 18)
+  frame12.BackgroundColor3 = p23 and Color3.fromRGB(45, 180, 95) or Color3.fromRGB(38, 43, 56)
+  frame12.BorderSizePixel = 0
+  frame12.Parent = textButton5
+
+  Instance.new("UICorner", frame12).CornerRadius = UDim.new(0, 5)
+
+  local textLabel13 = Instance.new("TextLabel")
+  textLabel13.Size = UDim2.fromScale(1, 1)
+  textLabel13.BackgroundTransparency = 1
+  textLabel13.Text = p23 and "✓" or ""
+  textLabel13.TextColor3 = Color3.new(1, 1, 1)
+  textLabel13.Font = Enum.Font.BuilderSansBold
+  textLabel13.TextSize = 13
+  textLabel13.Parent = frame12
+
+  local textLabel14 = Instance.new("TextLabel")
+  textLabel14.Position = UDim2.fromOffset(38, 0)
+  textLabel14.Size = UDim2.new(1, -46, 1, 0)
+  textLabel14.BackgroundTransparency = 1
+  textLabel14.Text = text6
+  textLabel14.TextColor3 = Color3.fromRGB(220, 225, 235)
+  textLabel14.TextSize = 13
+  textLabel14.Font = Enum.Font.BuilderSansMedium
+  textLabel14.TextXAlignment = Enum.TextXAlignment.Left
+  textLabel14.Parent = textButton5
+
+  local v42 = p23
+
+  f7(textButton5.MouseButton1Click, function()
+    v42 = not v42
+
+    tweenService:Create(frame12, TweenInfo.new(0.15), {
+      BackgroundColor3 = v42 and Color3.fromRGB(45, 180, 95) or Color3.fromRGB(38, 43, 56),
+    }):Play()
+
+    textLabel13.Text = v42 and "✓" or ""
+    fn3(v42)
+  end)
+
+  return textButton5
+end
+
+scrollingFrame.Active = true
+scrollingFrame.ScrollBarImageTransparency = 0.3
+scrollingFrame.ScrollingEnabled = true
+scrollingFrame.Parent = mainWindow
+
+local function f17(p24)
+  local textLabel15 = Instance.new("TextLabel")
+  textLabel15.Size = UDim2.new(1, 0, 0, 24)
+  textLabel15.BackgroundTransparency = 1
+  textLabel15.Text = string.upper(p24)
+  textLabel15.TextColor3 = Color3.fromRGB(165, 90, 255)
+  textLabel15.TextSize = 11
+  textLabel15.Font = Enum.Font.BuilderSansBold
+  textLabel15.TextXAlignment = Enum.TextXAlignment.Left
+  textLabel15.Parent = scrollingFrame
+
+  return textLabel15
+end
+
+local instance = Instance.new("UICorner", scrollingFrame)
+
+local function f18(text7, p25, p26, p27, p28, fn4, p29)
+  local frame13 = Instance.new("Frame")
+  frame13.Size = UDim2.new(1, 0, 0, 64)
+  frame13.BackgroundTransparency = 1
+  frame13.Parent = scrollingFrame
+
+  local textLabel16 = Instance.new("TextLabel")
+  textLabel16.Position = UDim2.fromOffset(2, 0)
+  textLabel16.Size = UDim2.new(1, -4, 0, 22)
+  textLabel16.BackgroundTransparency = 1
+  textLabel16.TextColor3 = Color3.fromRGB(225, 220, 240)
+  textLabel16.TextSize = 13
+  textLabel16.Font = Enum.Font.BuilderSansMedium
+  textLabel16.TextXAlignment = Enum.TextXAlignment.Left
+  textLabel16.Parent = frame13
+
+  local textLabel17 = Instance.new("TextLabel")
+  textLabel17.AnchorPoint = Vector2.new(1, 0)
+  textLabel17.Position = UDim2.new(1, -2, 0, 0)
+  textLabel17.Size = UDim2.fromOffset(70, 22)
+  textLabel17.BackgroundTransparency = 1
+  textLabel17.TextColor3 = Color3.fromRGB(80, 220, 135)
+  textLabel17.TextSize = 12
+  textLabel17.Font = Enum.Font.BuilderSansBold
+  textLabel17.TextXAlignment = Enum.TextXAlignment.Right
+  textLabel17.Parent = frame13
+
+  local frame14 = Instance.new("Frame")
+  frame14.Position = UDim2.fromOffset(2, 31)
+  frame14.Size = UDim2.new(1, -4, 0, 7)
+  frame14.BackgroundColor3 = Color3.fromRGB(25, 55, 38)
+  frame14.BorderSizePixel = 0
+  frame14.Active = true
+  frame14.Parent = frame13
+
+  Instance.new("UICorner", frame14).CornerRadius = UDim.new(1, 0)
+
+  local frame15 = Instance.new("Frame")
+  frame15.Size = UDim2.new(0, 0, 1, 0)
+  frame15.BackgroundColor3 = Color3.fromRGB(50, 195, 105)
+  frame15.BorderSizePixel = 0
+  frame15.Parent = frame14
+
+  Instance.new("UICorner", frame15).CornerRadius = UDim.new(1, 0)
+
+  local frame16 = Instance.new("Frame")
+  frame16.AnchorPoint = Vector2.new(0.5, 0.5)
+  frame16.Size = UDim2.fromOffset(16, 16)
+  frame16.BackgroundColor3 = Color3.fromRGB(100, 230, 150)
+  frame16.BorderSizePixel = 0
+  frame16.Parent = frame14
+
+  Instance.new("UICorner", frame16).CornerRadius = UDim.new(1, 0)
+  local v43 = false
+
+  local function f19(p30)
+    if p29 then
+      return p29(p30)
+    end
+
+    if p27 < 1 then
+      return string.format("%.2f", p30)
+    end
+
+    return tostring(math.floor(p30 + 0.5))
+  end
+
+  local function f20(p31)
+    local v44 = math.clamp(p31, p25, p26)
+
+    if p27 > 0 then
+      local v45 = v44 - p25
+      local v46 = math.floor(v45 / p27 + 0.5)
+      v44 = math.clamp(p25 + v46 * p27, p25, p26)
+    end
+
+    local v47 = p26 - p25
+    local v48 = v47 == 0 and 0 or (v44 - p25) / v47
+    frame15.Size = UDim2.new(v48, 0, 1, 0)
+    frame16.Position = UDim2.new(v48, 0, 0.5, 0)
+    textLabel16.Text = text7
+    textLabel17.Text = f19(v44)
+    fn4(v44)
+  end
+
+  local function f21(p32)
+    local v49 = math.max(frame14.AbsoluteSize.X, 1)
+
+    f20(p25
+      + (p26 - p25) * (math.clamp(p32.Position.X - frame14.AbsolutePosition.X, 0, v49) / v49))
+  end
+
+  f7(frame14.InputBegan, function(p33)
+    if p33.UserInputType == Enum.UserInputType.MouseButton1
+      or p33.UserInputType == Enum.UserInputType.Touch then
+      v43 = true
+      f21(p33)
+    end
+  end)
+
+  f7(userInputService.InputChanged, function(p34)
+    if v43
+      and (p34.UserInputType == Enum.UserInputType.MouseMovement
+        or p34.UserInputType == Enum.UserInputType.Touch) then
+      f21(p34)
+    end
+  end)
+
+  f7(userInputService.InputEnded, function(p35)
+    if p35.UserInputType == Enum.UserInputType.MouseButton1
+      or p35.UserInputType == Enum.UserInputType.Touch then
+      v43 = false
+    end
+  end)
+
+  f20(p28)
+  return frame13
+end
+
+instance.CornerRadius = UDim.new(0, 10)
+
+local function f22()
+  for index4, value4 in ipairs(scrollingFrame:GetChildren()) do
+    if not value4:IsA("UICorner") then
+      value4:Destroy()
+    end
+  end
+end
+
+local v50 = {}
+local lucideRobloxDirect = nil
+
+pcall(function()
+  lucideRobloxDirect = loadstring((game:HttpGet("https://raw.githubusercontent.com/deividcomsono/lucide-roblox-direct/refs/heads/main/source.lua")))()
+end)
+
+local function f23(p36)
+  if not lucideRobloxDirect or type(lucideRobloxDirect.GetAsset) ~= "function" then
+    return nil
+  else
+    local v51, v52 = pcall(lucideRobloxDirect.GetAsset, p36)
+
+    if not v51 or type(v52) ~= "table" then
+      return nil
+    end
+
+    return v52
+  end
+end
+
+local function f24(parent, p37)
+  local icon = Instance.new("Frame")
+  icon.Name = "Icon"
+  icon.Position = UDim2.fromOffset(10, 8)
+  icon.Size = UDim2.fromOffset(20, 20)
+  icon.BackgroundTransparency = 1
+  icon.Parent = parent
+
+  local color7 = Color3.fromRGB(185, 190, 215)
+
+  local function f25(p38, p39)
+    local frame17 = Instance.new("Frame")
+    frame17.BorderSizePixel = 0
+    frame17.BackgroundColor3 = color7
+    frame17.AnchorPoint = Vector2.new(0, 0.5)
+    frame17.Position = UDim2.fromScale(p38[1], p38[2])
+
+    local v53 = p39[1] - p38[1]
+    local v54 = p39[2] - p38[2]
+    local v55 = math.sqrt(v53 * v53 + v54 * v54)
+
+    frame17.Size = UDim2.new(0, v55 * 20, 0, 1.7)
+    frame17.Rotation = math.deg(math.atan2(v54, v53))
+    frame17.Parent = icon
+  end
+
+  local function f26(p40, p41, p42)
+    local frame18 = Instance.new("Frame")
+    frame18.BorderSizePixel = 0
+    frame18.BackgroundTransparency = p42 and 0 or 1
+    frame18.BackgroundColor3 = color7
+    frame18.Position = UDim2.fromScale(p40[1], p40[2])
+    frame18.Size = UDim2.fromScale(p41, p41)
+    frame18.Parent = icon
+
+    local uiCorner5 = Instance.new("UICorner")
+    uiCorner5.CornerRadius = UDim.new(1, 0)
+    uiCorner5.Parent = frame18
+
+    if not p42 then
+      local uiStroke9 = Instance.new("UIStroke")
+      uiStroke9.Color = color7
+      uiStroke9.Thickness = 1.7
+      uiStroke9.Parent = frame18
+    end
+  end
+
+  if p37 == "crosshair" then
+    f26({ 0.25, 0.25 }, 0.5, false)
+    f26({ 0.44, 0.44 }, 0.12, true)
+
+    f25({ 0.5, 0.02 }, { 0.5, 0.23 })
+    f25({ 0.5, 0.77 }, { 0.5, 0.98 })
+    f25({ 0.02, 0.5 }, { 0.23, 0.5 })
+    f25({ 0.77, 0.5 }, { 0.98, 0.5 })
+  elseif p37 == "eye" then
+    f25({ 0.08, 0.5 }, { 0.28, 0.28 })
+    f25({ 0.28, 0.28 }, { 0.5, 0.2 })
+    f25({ 0.5, 0.2 }, { 0.72, 0.28 })
+    f25({ 0.72, 0.28 }, { 0.92, 0.5 })
+    f25({ 0.92, 0.5 }, { 0.72, 0.72 })
+    f25({ 0.72, 0.72 }, { 0.5, 0.8 })
+    f25({ 0.5, 0.8 }, { 0.28, 0.72 })
+    f25({ 0.28, 0.72 }, { 0.08, 0.5 })
+
+    f26({ 0.41, 0.41 }, 0.18, false)
+  elseif p37 == "globe-2" or p37 == "globe" then
+  elseif p37 == "user-round" or p37 == "user" then
+    f26({ 0.36, 0.08 }, 0.28, false)
+
+    local frame19 = Instance.new("Frame")
+    frame19.BorderSizePixel = 0
+    frame19.BackgroundTransparency = 1
+    frame19.Position = UDim2.fromScale(0.17, 0.46)
+    frame19.Size = UDim2.fromScale(0.66, 0.44)
+    frame19.Parent = icon
+
+    local uiStroke10 = Instance.new("UIStroke")
+    uiStroke10.Color = color7
+    uiStroke10.Thickness = 1.7
+    uiStroke10.Parent = frame19
+
+    local uiCorner6 = Instance.new("UICorner")
+    uiCorner6.CornerRadius = UDim.new(1, 0)
+    uiCorner6.Parent = frame19
+  elseif p37 == "info" or p37 == "badge-info" then
+    f26({ 0.12, 0.12 }, 0.76, false)
+    f26({ 0.465, 0.25 }, 0.07, true)
+    f25({ 0.5, 0.4 }, { 0.5, 0.73 })
+  end
+
+  return icon
+end
+
+local function f27(p43, p44)
+  local icon2 = Instance.new("ImageLabel")
+  icon2.Name = "Icon"
+  icon2.Position = UDim2.fromOffset(10, 8)
+  icon2.Size = UDim2.fromOffset(20, 20)
+  icon2.BackgroundTransparency = 1
+  icon2.ScaleType = Enum.ScaleType.Fit
+  icon2.ImageColor3 = Color3.fromRGB(185, 190, 215)
+  icon2.Parent = p43
+
+  if p44 == "globe" then
+    icon2.Image = "rbxassetid://10723404337"
+    return icon2
+  else
+    local v56 = f23(p44)
+
+    if v56 then
+      local url = v56.Url
+      local id = v56.Id or v56.id
+
+      if not url and id then
+        url = "rbxassetid://" .. tostring(id)
+      end
+
+      if url then
+        icon2.Image = url
+        local imageRectOffset = v56.ImageRectOffset or v56.imageRectOffset
+        local imageRectSize = v56.ImageRectSize or v56.imageRectSize
+
+        if imageRectOffset and imageRectSize then
+          icon2.ImageRectOffset = imageRectOffset
+          icon2.ImageRectSize = imageRectSize
+        end
+
+        return icon2
+      end
+
+      icon2:Destroy()
+      return f24(p43, p44)
+    end
+
+    icon2:Destroy()
+    return f24(p43, p44)
+  end
+end
+
+local v57
+
+local function f28(p45, fn5)
+  v57 = p45
+
+  for key, value5 in pairs(v50) do
+    local v58 = key == p45
+    local color8 = v58 and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(140, 150, 175)
+    value5.BackgroundColor3 = v58 and Color3.fromRGB(125, 65, 205) or Color3.fromRGB(21, 25, 35)
+    local label = value5:FindFirstChild("Label")
+
+    if label then
+      label.TextColor3 = color8
+    end
+  end
+
+  f22()
+  scrollingFrame.CanvasPosition = Vector2.new(0, 0)
+  fn5()
+end
+
+local function f29(p46, p47)
+  local textButton6 = Instance.new("TextButton")
+  textButton6.Size = UDim2.new(1, 0, 0, 36)
+  textButton6.BackgroundColor3 = Color3.fromRGB(21, 25, 35)
+  textButton6.BorderSizePixel = 0
+  textButton6.AutoButtonColor = false
+  textButton6.Text = ""
+  textButton6.Parent = frame8
+
+  Instance.new("UICorner", textButton6).CornerRadius = UDim.new(0, 9)
+  f27(textButton6, p47)
+
+  local label2 = Instance.new("TextLabel")
+  label2.Name = "Label"
+  label2.Position = UDim2.fromOffset(35, 0)
+  label2.Size = UDim2.new(1, -41, 1, 0)
+  label2.BackgroundTransparency = 1
+  label2.Text = p46
+  label2.TextColor3 = Color3.fromRGB(140, 150, 175)
+  label2.TextSize = 12
+  label2.Font = Enum.Font.BuilderSansMedium
+  label2.TextXAlignment = Enum.TextXAlignment.Left
+  label2.Parent = textButton6
+
+  v50[p46] = textButton6
+  return textButton6
+end
+
+local f30
+
+local function f31()
+  local uiListLayout3 = Instance.new("UIListLayout")
+  uiListLayout3.Padding = UDim.new(0, 8)
+  uiListLayout3.SortOrder = Enum.SortOrder.LayoutOrder
+  uiListLayout3.Parent = scrollingFrame
+
+  f30(scrollingFrame)
+  return uiListLayout3
+end
+
+function f30(parent2)
+  local uiPadding = Instance.new("UIPadding")
+  uiPadding.PaddingTop = UDim.new(0, 12)
+  uiPadding.PaddingBottom = UDim.new(0, 12)
+  uiPadding.PaddingLeft = UDim.new(0, 12)
+  uiPadding.PaddingRight = UDim.new(0, 12)
+  uiPadding.Parent = parent2
+end
+
+local v59 = f29("Main", "crosshair")
+local v60 = f29("ESP", "eye")
+local v61 = f29("Mics", "globe")
+local v62 = f29("Teleport", "user-round")
+local v63 = f29("About", "info")
+
+local function f32(p48)
+  v13.TrackingEnabled = p48
+
+  if p48 then
+    aimToggle.Text = "AIM"
+    aimToggle.BackgroundColor3 = Color3.fromRGB(45, 180, 95)
+    f8("Aimbot ON")
+  else
+    aimToggle.Text = "OFF"
+    aimToggle.BackgroundColor3 = Color3.fromRGB(235, 65, 65)
+
+    task.delay(0.3, function()
+      if not v13.TrackingEnabled then
+        aimToggle.Text = "AIM"
+      end
+    end)
+
+    f8("Aimbot OFF")
+  end
+
+  fovCircle.Visible = p48 and v13.FOVEnabled
+end
+
+local function f33(p49)
+  local v64 = tonumber(p49) or 100
+
+  if v64 >= 100 then
+    return true
+  end
+
+  if v64 <= 0 then
+    return false
+  end
+
+  return math.random(1, 100) <= v64
+end
+
+local function f34(p50)
+  if not p50 or p50 == localPlayer then
+    return false
+  elseif v13.SA2_TeamTarget == "All" then
+    return true
+  elseif v13.SA2_TeamTarget == "Teams" then
+    if localPlayer.Team and p50.Team then
+      return localPlayer.Team == p50.Team
+    end
+
+    return false
+  else
+    if localPlayer.Team and p50.Team then
+      return localPlayer.Team ~= p50.Team
+    end
+
+    return true
+  end
+end
+
+local v65 = {
+  targetPart = nil,
+  targetPlayer = nil,
+  namecallOld = nil,
+  indexOld = nil,
+  mouseHookActive = false,
+  hookActive = false,
+  fovCircle = nil,
+  fovStroke = nil,
+}
+
+local f35
+
+local function f36(p51)
+  local v66 = f35(p51)
+
+  if not v66 then
+    return false
+  else
+    local humanoid2 = v66:FindFirstChildOfClass("Humanoid")
+    local humanoidRootPart2 = v66:FindFirstChild("HumanoidRootPart")
+    return humanoid2 ~= nil and humanoid2.Health > 0 and humanoidRootPart2 ~= nil
+  end
+end
+
+local function f37(p52)
+  local v67 = f35(p52)
+
+  if not v67 then
+    return nil
+  elseif v13.SA2_TargetPart == "Random" then
+    if f33(v13.SA2_HeadshotChance) then
+      return v67:FindFirstChild("Head") or v67:FindFirstChild("HumanoidRootPart")
+    end
+
+    return v67:FindFirstChild("HumanoidRootPart") or v67:FindFirstChild("Head")
+  else
+    return v67:FindFirstChild(v13.SA2_TargetPart) or v67:FindFirstChild("Head")
+      or v67:FindFirstChild("HumanoidRootPart")
+  end
+end
+
+function f35(p53)
+  if not p53 then
+    return nil
+  elseif typeof(p53) == "Instance" then
+    if p53:IsA("Player") then
+      return p53.Character
+    end
+
+    if p53:IsA("Model") then
+      return p53
+    end
+
+    return nil
+  else
+    return nil
+  end
+end
+
+local function f38(p54)
+  if typeof(p54) ~= "Instance" then
+    return false
+  end
+
+  if not (p54:IsA("RemoteEvent") or p54:IsA("RemoteFunction") or p54:IsA("UnreliableRemoteEvent")) then
+    return false
+  else
+    local v68 = string.lower(p54.Name)
+
+    for index5, value6 in ipairs(v13.SA2_RemoteNames or {}) do
+      if string.find(v68, string.lower(tostring(value6)), 1, true) then
+        return true
+      end
+    end
+
+    return false
+  end
+end
+
+local function f39(p55, p56)
+  if not v13.SA2_Wallcheck then
+    return true
+  end
+
+  if not p55 or not p56 then
+    return false
+  else
+    local currentCamera6 = v1.CurrentCamera
+
+    if not currentCamera6 then
+      return false
+    else
+      local position9 = currentCamera6.CFrame.Position
+      local position10 = p56.Position
+
+      local raycastParams2 = RaycastParams.new()
+      raycastParams2.FilterType = Enum.RaycastFilterType.Exclude
+      raycastParams2.FilterDescendantsInstances = { localPlayer.Character, p55 }
+      raycastParams2.IgnoreWater = true
+
+      return v1:Raycast(position9, position10 - position9, raycastParams2) == nil
+    end
+  end
+end
+
+local function f40(p57)
+  local v69 = not p57 or not p57.Parent
+  local zero
+
+  if v69 then
+    return nil
+  else
+    local v70 = tonumber(v13.SA2_Prediction)
+    local v71 = math.clamp(v70 or 0, 0, 0.5)
+
+    if v71 <= 0 then
+      return p57.Position
+    end
+
+    zero = Vector3.zero
+    pcall(function() zero = p57.AssemblyLinearVelocity end)
+    return p57.Position + zero * v71
+  end
+end
+
+local function f41()
+  local health
+
+  if not v13.SilentAimHK then
+    return nil, nil
+  else
+    local currentCamera7 = v1.CurrentCamera
+
+    if not currentCamera7 then
+      return nil, nil
+    else
+      local vector = Vector2.new(
+        currentCamera7.ViewportSize.X / 2, currentCamera7.ViewportSize.Y / 2
+      )
+
+      local v72 = nil
+      local v73 = nil
+      local huge2 = math.huge
+      local v74 = (tonumber(v13.SA2_FovRadius) or 100) ^ 2
+      local v75 = tonumber(v13.SA2_TargetRange) or 500
+      local character3 = localPlayer.Character
+      local humanoidRootPart3 = character3 and character3:FindFirstChild("HumanoidRootPart")
+
+      if not humanoidRootPart3 then
+        return nil, nil
+      end
+
+      for index6, value7 in ipairs(players:GetPlayers()) do
+        if f34(value7) and f36(value7) then
+          local character4 = value7.Character
+          local v76 = f37(value7)
+
+          if character4 and v76 then
+            local magnitude = (v76.Position - humanoidRootPart3.Position).Magnitude
+
+            if magnitude <= v75 and f39(character4, v76) then
+              local v77, v78 = currentCamera7:WorldToViewportPoint(v76.Position)
+              local v79 = false
+              local huge3 = math.huge
+
+              if v13.SA2_ThreeSixtyMode then
+                v79 = true
+              elseif v78 and v77.Z > 0 then
+                local v80 = v77.X - vector.X
+                local v81 = v77.Y - vector.Y
+                huge3 = v80 * v80 + v81 * v81
+                v79 = huge3 <= v74
+              end
+
+              if v79 then
+                if v13.SA2_GetTarget == "Lowest Health" then
+                  local humanoid3 = character4:FindFirstChildOfClass("Humanoid")
+                  health = humanoid3 and humanoid3.Health or math.huge
+                else
+                  health = v13.SA2_ThreeSixtyMode and magnitude or huge3
+                end
+
+                if health < huge2 then
+                  huge2 = health
+                  v72 = value7
+                  v73 = v76
+                end
+              end
+            end
+          end
+        end
+      end
+
+      return v72, v73
+    end
+  end
+end
+
+local function f42()
+  if not v13.SilentAimHK then
+    v65.targetPlayer = nil
+    v65.targetPart = nil
+    return
+  else
+    local targetPlayer, targetPart = f41()
+
+    v65.targetPlayer = targetPlayer
+    v65.targetPart = targetPart
+
+    return
+  end
+end
+
+local function f43(p58, p59, p60, p61)
+  local v82 = typeof(p58)
+  local v83 = type(p59) == "string" and string.lower(p59) or ""
+
+  if v82 == "Vector3" then
+    if v83 == "direction" or v83 == "lookvector" or v83 == "dir" or v83 == "aimdirection" then
+      local v84 = p60 - p58
+      return v84.Magnitude > 0 and v84.Unit or p58
+    end
+
+    if v83 == "hitposition" or v83 == "hitpos" or v83 == "endposition" or v83 == "endpos"
+      or v83 == "targetposition" then
+      return p60
+    end
+
+    if v13.SA2_BulletTeleport
+      and (v83 == "origin" or v83 == "start" or v83 == "startpos" or v83 == "startposition"
+        or v83 == "muzzleposition") then
+      local v85 = p60 - p58
+      return v85.Magnitude > 0 and p60 - v85.Unit * 2 or p58
+    end
+
+    return p58
+  elseif v82 == "CFrame" then
+    if v83 == "direction" or v83 == "lookvector" or v83 == "dir" then
+      return CFrame.lookAt(p58.Position, p60)
+    end
+
+    if v83 == "origin" or v83 == "start" or v83 == "startpos" or v83 == "startposition" then
+      if v13.SA2_BulletTeleport then
+        local v86 = p60 - p58.Position
+
+        if v86.Magnitude > 0 then
+          return CFrame.new(p60 - v86.Unit * 2)
+        end
+
+        return p58
+      end
+
+      return p58
+    end
+
+    return p58
+  elseif v82 == "Ray" then
+    local origin = p58.Origin
+
+    if v13.SA2_BulletTeleport then
+      local v87 = p60 - origin
+
+      if v87.Magnitude > 0 then
+        origin = p60 - v87.Unit * 2
+      end
+    end
+
+    local v88 = p60 - origin
+    return v88.Magnitude > 0 and Ray.new(origin, v88.Unit * 1000) or p58
+  else
+    if v82 == "table" then
+      local v89 = false
+      local v90 = {}
+      local v91 = false
+      local v92 = false
+
+      for key2, value8 in pairs(p58) do
+        local v93 = type(key2) == "string" and string.lower(key2) or ""
+        v90[key2] = f43(value8, v93, p60, p61)
+
+        if v93 == "direction" or v93 == "lookvector" or v93 == "dir" then
+          v91 = true
+        elseif v93 == "hitposition" or v93 == "hitpos" or v93 == "endposition"
+          or v93 == "endpos" then
+          v92 = true
+        elseif v93 == "hitpart" or v93 == "target" then
+          v89 = true
+        end
+      end
+
+      if v91 and not v92 then
+        v90.hitPosition = p60
+      end
+
+      if v91 and not v89 then
+        v90.hitPart = p61
+      end
+
+      if v13.SA2_Wallbang then
+        for key3 in pairs(v90) do
+          local v94 = type(key3) == "string" and string.lower(key3) or ""
+
+          if v94 == "hitthroughwall" or v94 == "ignorewalls" or v94 == "wallbang"
+            or v94 == "penetrate" then
+            v90[key3] = true
+          end
+        end
+      end
+
+      return v90
+    end
+
+    return p58
+  end
+end
+
+local function f45()
+  if v65.namecallOld and hookmetamethod then
+    pcall(function() hookmetamethod(game, "__namecall", v65.namecallOld) end)
+    v65.namecallOld = nil
+  end
+
+  if v65.indexOld and hookmetamethod then
+    pcall(function() hookmetamethod(game, "__index", v65.indexOld) end)
+    v65.indexOld = nil
+  end
+
+  v65.hookActive = false
+  v65.mouseHookActive = false
+end
+
+local function f46(p62, p63, p64)
+  local v95 = table.clone(p62)
+
+  for index7, value9 in ipairs(v95) do
+    local v96 = typeof(value9)
+
+    if v96 == "table" then
+      v95[index7] = f43(value9, nil, p63, p64)
+    elseif v96 == "Vector3" then
+      local v97 = p63 - value9
+
+      if v97.Magnitude > 0 then
+        v95[index7] = v97.Unit * math.max(v97.Magnitude, 1)
+      end
+    elseif v96 == "CFrame" then
+      v95[index7] = CFrame.lookAt(value9.Position, p63)
+    elseif v96 == "Ray" then
+      v95[index7] = f43(value9, nil, p63, p64)
+    end
+  end
+
+  return v95
+end
+
+local f47
+
+local function f48(p65)
+  v13.SilentAimHK = p65
+
+  if p65 then
+    f47()
+    f8("Silent Aim ON")
+  else
+    v65.targetPlayer = nil
+    v65.targetPart = nil
+    f8("Silent Aim OFF")
+  end
+end
+
+function f47()
+  if v65.hookActive then
+    return
+  end
+
+  if type(hookmetamethod) ~= "function" or type(newcclosure) ~= "function"
+    or type(getnamecallmethod) ~= "function" or type(checkcaller) ~= "function" then
+    warn("[MASTERSAM] SilentAim HK needs metamethod hook support.")
+    return
+  end
+
+  v65.namecallOld = hookmetamethod(game, "__namecall", newcclosure(function(...)
+    local v98 = { ... }
+
+    if not v13.SilentAimHK then
+      return v65.namecallOld(...)
+    elseif v13._SA2HookBusy then
+      return v65.namecallOld(...)
+    elseif checkcaller() then
+      return v65.namecallOld(...)
+    else
+      local v99 = getnamecallmethod()
+      local v100 = v99 == "Raycast"
+      local v101 = not v100
+      local v102 = v99 == "FireServer"
+      local v103 = v99 == "InvokeServer"
+
+      if v101 and not v102 and not v103 then
+        return v65.namecallOld(...)
+      else
+        local v104 = {}
+
+        for index8, value10 in ipairs(v13.SA2_AimMethods or {}) do
+          v104[value10] = true
+        end
+
+        if v100 and not v104.Raycast then
+          return v65.namecallOld(...)
+        end
+
+        if v102 and not v104.FireServer then
+          return v65.namecallOld(...)
+        end
+
+        if v103 and not v104.InvokeServer then
+          return v65.namecallOld(...)
+        end
+
+        if (v102 or v103) and not f38(v98[1]) then
+          return v65.namecallOld(...)
+        end
+
+        if not v13.SA2_ThreeSixtyMode and not f33(v13.SA2_HitChance) then
+          return v65.namecallOld(...)
+        else
+          local targetPart2 = v65.targetPart
+
+          if not targetPart2 or not targetPart2.Parent then
+            return v65.namecallOld(...)
+          else
+            local v105 = f40(targetPart2)
+
+            if not v105 then
+              return v65.namecallOld(...)
+            elseif v100 then
+              local v106 = v98[2]
+              local v107 = v98[3]
+
+              if typeof(v106) ~= "Vector3" or typeof(v107) ~= "Vector3" then
+                return v65.namecallOld(...)
+              elseif v13.SA2_BulletTeleport then
+                local v108 = v105 - v106
+
+                if v108.Magnitude > 0 then
+                  local unit = v108.Unit
+                  v98[2] = v105 - unit * 2
+                  v98[3] = unit * (v108.Magnitude + 2)
+                end
+
+                return v65.namecallOld(unpack(v98))
+              elseif v13.SA2_Wallbang then
+                return {
+                  Instance = targetPart2,
+                  Position = v105,
+                  Normal = (v105 - v106).Magnitude > 0 and (v105 - v106).Unit
+                    or Vector3.new(0, 1, 0),
+                  Material = targetPart2.Material,
+                  Distance = (v105 - v106).Magnitude,
+                }
+              else
+                local v109 = v105 - v106
+
+                if v109.Magnitude > 0 then
+                  v98[3] = v109.Unit * v107.Magnitude
+                end
+
+                return v65.namecallOld(unpack(v98))
+              end
+            else
+              local v110 = f46(v98, v105, targetPart2)
+              return v65.namecallOld(unpack(v110))
+            end
+          end
+        end
+      end
+    end
+  end))
+
+  v65.hookActive = true
+
+  if not v65.indexOld then
+    v65.indexOld = hookmetamethod(game, "__index", newcclosure(function(p66, p67)
+      if not v13.SilentAimHK or v13._SA2HookBusy or checkcaller() then
+        return v65.indexOld(p66, p67)
+      else
+        local v111 = false
+
+        for index9, value11 in ipairs(v13.SA2_AimMethods or {}) do
+          if value11 == "Mouse.Hit" then
+            v111 = true
+            break
+          end
+        end
+
+        if not v111 then
+          return v65.indexOld(p66, p67)
+        elseif p66 ~= localPlayer:GetMouse() then
+          return v65.indexOld(p66, p67)
+        else
+          local targetPart3 = v65.targetPart
+
+          if not targetPart3 or not targetPart3.Parent then
+            return v65.indexOld(p66, p67)
+          else
+            local currentCamera8 = v1.CurrentCamera
+            local v112 = f40(targetPart3)
+
+            if not currentCamera8 or not v112 then
+              return v65.indexOld(p66, p67)
+            elseif p67 == "Hit" then
+              local v113 = v112 - currentCamera8.CFrame.Position
+
+              if v113.Magnitude > 0 then
+                return CFrame.lookAt(v112, v112 + v113.Unit)
+              end
+
+              return v65.indexOld(p66, p67)
+            elseif p67 == "Target" then
+              return targetPart3
+            elseif p67 == "TargetFilter" then
+              return nil
+            elseif p67 == "UnitRay" then
+              local v114 = v112 - currentCamera8.CFrame.Position
+
+              if v114.Magnitude > 0 then
+                return Ray.new(currentCamera8.CFrame.Position, v114.Unit * (v114.Magnitude + 5))
+              end
+
+              return v65.indexOld(p66, p67)
+            elseif p67 == "X" then
+              return currentCamera8:WorldToViewportPoint(v112).X
+            else
+              if p67 == "Y" then
+                return currentCamera8:WorldToViewportPoint(v112).Y
+              end
+
+              return v65.indexOld(p66, p67)
+            end
+          end
+        end
+      end
+    end))
+
+    v65.mouseHookActive = true
+  end
+end
+
+f7(runService.Heartbeat, function()
+  if not v13.SilentAimHK then
+    return
+  end
+
+  f42()
+end)
+
+local mastersamSilentAimFOV = Instance.new("ScreenGui")
+mastersamSilentAimFOV.Name = "MASTERSAMSilentAimFOV"
+mastersamSilentAimFOV.ResetOnSpawn = false
+mastersamSilentAimFOV.IgnoreGuiInset = true
+mastersamSilentAimFOV.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+mastersamSilentAimFOV.Parent = localPlayer:WaitForChild("PlayerGui")
+
+local fov = Instance.new("Frame")
+fov.Name = "FOV"
+fov.AnchorPoint = Vector2.new(0.5, 0.5)
+fov.BackgroundTransparency = 1
+fov.BorderSizePixel = 0
+fov.Visible = false
+fov.Parent = mastersamSilentAimFOV
+
+Instance.new("UICorner", fov).CornerRadius = UDim.new(1, 0)
+
+local uiStroke11 = Instance.new("UIStroke")
+uiStroke11.Thickness = 1
+uiStroke11.Parent = fov
+
+v65.fovCircle = fov
+v65.fovStroke = uiStroke11
+
+f7(runService.Heartbeat, function()
+  local currentCamera9 = v1.CurrentCamera
+
+  if not currentCamera9 then
+    return
+  else
+    local sa2FovVisible = v13.SilentAimHK and v13.SA2_FovVisible and not v13.SA2_ThreeSixtyMode
+    fov.Visible = sa2FovVisible
+
+    if sa2FovVisible then
+      local viewportSize3 = currentCamera9.ViewportSize
+
+      fov.Position = UDim2.fromOffset(viewportSize3.X / 2, viewportSize3.Y / 2)
+
+      fov.Size = UDim2.fromOffset(
+        math.max(2, v13.SA2_FovRadius * 2), math.max(2, v13.SA2_FovRadius * 2)
+      )
+
+      uiStroke11.Color = v65.targetPart and v13.SA2_FovTargetColor or v13.SA2_FovColor
+      uiStroke11.Transparency = 1 - math.clamp(v13.SA2_FovTransparency, 0, 1)
+    end
+
+    return
+  end
+end)
+
+f7(userInputService.InputBegan, function(p68, p69)
+  if p69 then
+    return
+  end
+
+  if p68.KeyCode == v13.SA2_Key then
+    f48(not v13.SilentAimHK)
+  end
+end)
+
+if Window and type(Window.OnDestroy) == "function" then
+  pcall(function() Window:OnDestroy(function() pcall(function() f45() end) end) end)
+end
+
+local function f49()
+  local frame20 = Instance.new("Frame")
+  frame20.Size = UDim2.new(1, 0, 0, 58)
+  frame20.BackgroundColor3 = Color3.fromRGB(58, 35, 82)
+  frame20.BorderSizePixel = 0
+  frame20.Parent = scrollingFrame
+
+  Instance.new("UICorner", frame20).CornerRadius = UDim.new(0, 8)
+
+  local textLabel18 = Instance.new("TextLabel")
+  textLabel18.Position = UDim2.fromOffset(12, 7)
+  textLabel18.Size = UDim2.new(1, -24, 0, 17)
+  textLabel18.BackgroundTransparency = 1
+  textLabel18.Text = "Warning"
+  textLabel18.TextColor3 = Color3.fromRGB(225, 200, 255)
+  textLabel18.TextSize = 12
+  textLabel18.Font = Enum.Font.BuilderSansBold
+  textLabel18.TextXAlignment = Enum.TextXAlignment.Left
+  textLabel18.Parent = frame20
+
+  local textLabel19 = Instance.new("TextLabel")
+  textLabel19.Position = UDim2.fromOffset(12, 24)
+  textLabel19.Size = UDim2.new(1, -24, 0, 28)
+  textLabel19.BackgroundTransparency = 1
+  textLabel19.Text = "Use at your own risk • Don't use your main account if you plan to use this cheat."
+  textLabel19.TextColor3 = Color3.fromRGB(235, 230, 245)
+  textLabel19.TextSize = 10
+  textLabel19.Font = Enum.Font.BuilderSans
+  textLabel19.TextWrapped = true
+  textLabel19.TextXAlignment = Enum.TextXAlignment.Left
+  textLabel19.TextYAlignment = Enum.TextYAlignment.Top
+  textLabel19.Parent = frame20
+
+  return frame20
+end
+
+local function f50()
+  f31()
+  f17("Visual Overlay")
+
+  f16("Enable ESP", v13.ESPEnabled, function(espEnabled) v13.ESPEnabled = espEnabled end)
+  f16("Box ESP", v13.BoxESP, function(boxESP) v13.BoxESP = boxESP end)
+  f16("Name Tags", v13.NameTags, function(nameTags) v13.NameTags = nameTags end)
+  f16("Distance", v13.Distance, function(distance) v13.Distance = distance end)
+end
+
+local function f51()
+  f31()
+  f17("Silent Aim & Aimbot & Triggerbot")
+
+  f13("Silent aim", v13.SilentAimHK, function(p70)
+    f48(p70)
+    task.defer(function() f28("Main", f51) end)
+  end)
+
+  if v13.SilentAimHK then
+    f13("Wall Check", v13.SA2_Wallcheck, function(sa2Wallcheck)
+      v13.SA2_Wallcheck = sa2Wallcheck
+    end)
+
+    f13("Show FOV", v13.SA2_FovVisible, function(sa2FovVisible2)
+      v13.SA2_FovVisible = sa2FovVisible2
+    end)
+
+    f18("FOV", 10, 500, 5, v13.SA2_FovRadius, function(sa2FovRadius)
+      v13.SA2_FovRadius = sa2FovRadius
+    end)
+  end
+
+  f13("Aimbot", v13.TrackingEnabled, function(p71)
+    f32(p71)
+    task.defer(function() f28("Main", f51) end)
+  end)
+
+  local frame21, frame22, textLabel20, textButton7, textButton8, frame23, textLabel21, f52
+
+  if v13.TrackingEnabled then
+    frame21 = Instance.new("Frame")
+    frame21.Size = UDim2.new(1, 0, 0, 42)
+    frame21.BackgroundTransparency = 1
+    frame21.Parent = scrollingFrame
+
+    local textButton9 = Instance.new("TextButton")
+    textButton9.Size = UDim2.new(1, 0, 0, 42)
+    textButton9.BackgroundColor3 = Color3.fromRGB(23, 27, 37)
+    textButton9.BorderSizePixel = 0
+    textButton9.AutoButtonColor = false
+    textButton9.Text = ""
+    textButton9.Parent = frame21
+
+    Instance.new("UICorner", textButton9).CornerRadius = UDim.new(0, 8)
+
+    frame22 = Instance.new("Frame")
+    frame22.Position = UDim2.fromOffset(10, 12)
+    frame22.Size = UDim2.fromOffset(18, 18)
+
+    frame22.BackgroundColor3 = v13.ShowAimButton and Color3.fromRGB(45, 180, 95)
+      or Color3.fromRGB(38, 43, 56)
+
+    frame22.BorderSizePixel = 0
+    frame22.Parent = textButton9
+
+    Instance.new("UICorner", frame22).CornerRadius = UDim.new(0, 5)
+
+    textLabel20 = Instance.new("TextLabel")
+    textLabel20.Size = UDim2.fromScale(1, 1)
+    textLabel20.BackgroundTransparency = 1
+    textLabel20.Text = v13.ShowAimButton and "✓" or ""
+    textLabel20.TextColor3 = Color3.new(1, 1, 1)
+    textLabel20.Font = Enum.Font.BuilderSansBold
+    textLabel20.TextSize = 13
+    textLabel20.Parent = frame22
+
+    local textLabel22 = Instance.new("TextLabel")
+    textLabel22.Position = UDim2.fromOffset(38, 0)
+    textLabel22.Size = UDim2.new(1, -82, 1, 0)
+    textLabel22.BackgroundTransparency = 1
+    textLabel22.Text = "Show Aim Button"
+    textLabel22.TextColor3 = Color3.fromRGB(220, 225, 235)
+    textLabel22.TextSize = 13
+    textLabel22.Font = Enum.Font.BuilderSansMedium
+    textLabel22.TextXAlignment = Enum.TextXAlignment.Left
+    textLabel22.Parent = textButton9
+
+    textButton7 = Instance.new("TextButton")
+    textButton7.AnchorPoint = Vector2.new(1, 0.5)
+    textButton7.Position = UDim2.new(1, -8, 0.5, 0)
+    textButton7.Size = UDim2.fromOffset(34, 32)
+    textButton7.BackgroundColor3 = Color3.fromRGB(35, 27, 48)
+    textButton7.BorderSizePixel = 0
+    textButton7.AutoButtonColor = false
+    textButton7.Text = "›"
+    textButton7.TextColor3 = Color3.fromRGB(205, 175, 245)
+    textButton7.TextSize = 21
+    textButton7.Font = Enum.Font.BuilderSansBold
+    textButton7.Parent = textButton9
+
+    Instance.new("UICorner", textButton7).CornerRadius = UDim.new(0, 8)
+
+    textButton8 = Instance.new("TextButton")
+    textButton8.Position = UDim2.fromOffset(0, 47)
+    textButton8.Size = UDim2.new(1, 0, 0, 38)
+    textButton8.BackgroundColor3 = Color3.fromRGB(27, 23, 38)
+    textButton8.BorderSizePixel = 0
+    textButton8.AutoButtonColor = false
+    textButton8.Text = ""
+    textButton8.Visible = false
+    textButton8.Parent = frame21
+
+    Instance.new("UICorner", textButton8).CornerRadius = UDim.new(0, 8)
+
+    local textLabel23 = Instance.new("TextLabel")
+    textLabel23.Position = UDim2.fromOffset(38, 0)
+    textLabel23.Size = UDim2.new(1, -84, 1, 0)
+    textLabel23.BackgroundTransparency = 1
+    textLabel23.Text = "AIM button lock"
+    textLabel23.TextColor3 = Color3.fromRGB(205, 210, 225)
+    textLabel23.TextSize = 12
+    textLabel23.Font = Enum.Font.BuilderSansMedium
+    textLabel23.TextXAlignment = Enum.TextXAlignment.Left
+    textLabel23.Parent = textButton8
+
+    frame23 = Instance.new("Frame")
+    frame23.Position = UDim2.fromOffset(10, 10)
+    frame23.Size = UDim2.fromOffset(18, 18)
+
+    frame23.BackgroundColor3 = v31 and Color3.fromRGB(45, 180, 95)
+      or Color3.fromRGB(38, 43, 56)
+
+    frame23.BorderSizePixel = 0
+    frame23.Parent = textButton8
+
+    Instance.new("UICorner", frame23).CornerRadius = UDim.new(0, 5)
+
+    textLabel21 = Instance.new("TextLabel")
+    textLabel21.Size = UDim2.fromScale(1, 1)
+    textLabel21.BackgroundTransparency = 1
+    textLabel21.Text = v31 and "✓" or ""
+    textLabel21.TextColor3 = Color3.new(1, 1, 1)
+    textLabel21.Font = Enum.Font.BuilderSansBold
+    textLabel21.TextSize = 13
+    textLabel21.Parent = frame23
+
+    function f52()
+      frame22.BackgroundColor3 = v13.ShowAimButton and Color3.fromRGB(45, 180, 95)
+        or Color3.fromRGB(38, 43, 56)
+
+      textLabel20.Text = v13.ShowAimButton and "✓" or ""
+      aimToggle.Visible = v13.ShowAimButton
+      textButton8.Visible = v13.ShowAimButton and v32
+      frame21.Size = UDim2.new(1, 0, 0, textButton8.Visible and 89 or 42)
+      textButton7.Text = v32 and "⌄" or "›"
+
+      frame23.BackgroundColor3 = v31 and Color3.fromRGB(45, 180, 95)
+        or Color3.fromRGB(38, 43, 56)
+
+      textLabel21.Text = v31 and "✓" or ""
+    end
+
+    f7(textButton9.MouseButton1Click, function()
+      v13.ShowAimButton = not v13.ShowAimButton
+
+      if not v13.ShowAimButton then
+        v32 = false
+      end
+
+      f52()
+    end)
+
+    f7(textButton7.MouseButton1Click, function()
+      if not v13.ShowAimButton then
+        return
+      end
+
+      v32 = not v32
+      f52()
+    end)
+
+    f7(textButton8.MouseButton1Click, function()
+      v31 = not v31
+      f52()
+      f8(v31 and "AIM button locked" or "AIM button unlocked")
+    end)
+
+    f52()
+    f17("Aim Settings")
+
+    f18(
+      "Smoothness", 0.1, 0.9, 0.05, v13.Smoothness,
+      function(smoothness) v13.Smoothness = smoothness end,
+      function(p72) return string.format("%.2f", p72) end
+    )
+
+    f18("FOV Size", 10, 500, 5, v13.FOVSize, function(p73)
+      v13.FOVSize = p73
+      fovCircle.Size = UDim2.fromOffset(p73 * 2, p73 * 2)
+    end)
+
+    f13("Wall Check", v13.WallCheck, function(wallCheck) v13.WallCheck = wallCheck end)
+
+    f14("Aim Part", { "Head", "Torso", "(Soon)" }, v13.AimPart, function(aimPart)
+      v13.AimPart = aimPart
+    end)
+
+    f13("Hide FOV Circle", not v13.FOVEnabled, function(p74)
+      v13.FOVEnabled = not p74
+      fovCircle.Visible = v13.FOVEnabled and v13.TrackingEnabled
+    end)
+  end
+
+  f13("Triggerbot", v13.Triggerbot, function(p75)
+    v13.Triggerbot = p75
+
+    if triggerbotFOV then
+      triggerbotFOV.Visible = p75 and v13.TriggerbotFOVVisible
+    end
+
+    f8(p75 and "Triggerbot ON" or "Triggerbot OFF")
+
+    task.defer(function()
+      if v57 == "Main" then
+        f28("Main", f51)
+      end
+    end)
+  end)
+
+  if v13.Triggerbot then
+    v13.TriggerbotRate = 100
+    v13.TriggerbotInterval = 0.01
+
+    f13("Show FOV", v13.TriggerbotFOVVisible, function(p76)
+      v13.TriggerbotFOVVisible = p76
+
+      if triggerbotFOV then
+        triggerbotFOV.Visible = v13.Triggerbot and p76
+      end
+    end)
+
+    f18("FOV", 10, 500, 5, v13.TriggerbotFOV, function(p77)
+      v13.TriggerbotFOV = p77
+
+      if triggerbotFOV then
+        triggerbotFOV.Size = UDim2.fromOffset(p77 * 2, p77 * 2)
+      end
+    end)
+  end
+
+  if not v13.TrackingEnabled then
+    f49()
+  end
+end
+
+local f53
+
+local function f54()
+  f31()
+  f17("Movement")
+
+  f13("Speed Hack", v13.SpeedHack, function(p78)
+    v13.SpeedHack = p78
+    local character5 = localPlayer.Character
+    local humanoid4 = character5 and character5:FindFirstChildOfClass("Humanoid")
+
+    if humanoid4 then
+      if p78 then
+        humanoid4:SetAttribute("MASTERSAMOriginalWalkSpeed", humanoid4.WalkSpeed)
+        humanoid4.WalkSpeed = v13.WalkSpeedValue
+      else
+        local mastersamOriginalWalkSpeed = humanoid4:GetAttribute("MASTERSAMOriginalWalkSpeed")
+
+        if typeof(mastersamOriginalWalkSpeed) == "number" then
+          humanoid4.WalkSpeed = mastersamOriginalWalkSpeed
+          humanoid4:SetAttribute("MASTERSAMOriginalWalkSpeed", nil)
+        end
+      end
+    end
+
+    f8(p78 and "Speed Hack enabled" or "Speed Hack disabled")
+
+    task.defer(function()
+      if v57 == "Mics" then
+        f28("Mics", f54)
+      end
+    end)
+  end)
+
+  if v13.SpeedHack then
+    f18("WalkSpeed", 16, 250, 5, v13.WalkSpeedValue, function(p79)
+      v13.WalkSpeedValue = p79
+
+      if v13.SpeedHack then
+        local character6 = localPlayer.Character
+        local humanoid5 = character6 and character6:FindFirstChildOfClass("Humanoid")
+
+        if humanoid5 then
+          humanoid5.WalkSpeed = p79
+        end
+      end
+    end)
+  end
+
+  f13("Fly hack", v13.Fly, function(p80)
+    v13.Fly = p80
+    f8(p80 and "Fly hack enabled" or "Fly hack disabled")
+
+    task.defer(function()
+      if v57 == "Mics" then
+        f28("Mics", f54)
+      end
+    end)
+  end)
+
+  if v13.Fly then
+    f18("Fly hack Speed", 10, 200, 5, v13.FlySpeed, function(flySpeed)
+      v13.FlySpeed = flySpeed
+    end)
+  end
+
+  f16("No Clip", v13.NoClip, function(p81)
+    v13.NoClip = p81
+    f8(p81 and "No Clip enabled" or "No Clip disabled")
+  end)
+
+  f16("Infinite Jump", v13.InfiniteJump, function(p82)
+    v13.InfiniteJump = p82
+    f8(p82 and "Infinite Jump enabled" or "Infinite Jump disabled")
+  end)
+
+  f17("Character Modifiers")
+
+  f13("Big Head", v13.BigHead, function(p83)
+    v13.BigHead = p83
+    f53()
+    f8(p83 and "Big Head enabled" or "Big Head disabled")
+  end)
+
+  f13("Hitbox Expander", v13.HitboxExpander, function(p84)
+    v13.HitboxExpander = p84
+    f53()
+    f8(p84 and "Hitbox Expander enabled" or "Hitbox Expander disabled")
+
+    task.defer(function()
+      if v57 == "Mics" then
+        f28("Mics", f54)
+      end
+    end)
+  end)
+
+  if v13.HitboxExpander then
+    f18("Hitbox Size", 2, 20, 1, math.clamp(v13.HitboxSize, 2, 20), function(p85)
+      v13.HitboxSize = math.clamp(p85, 2, 20)
+      f53()
+    end)
+  end
+end
+
+f7(localPlayer.CharacterAdded, function(p86)
+  local waitForChild = p86:WaitForChild("Humanoid", 5)
+
+  if not waitForChild or not v5 then
+    return
+  end
+
+  if v13.SpeedHack then
+    waitForChild:SetAttribute("MASTERSAMOriginalWalkSpeed", waitForChild.WalkSpeed)
+    waitForChild.WalkSpeed = v13.WalkSpeedValue
+  end
+end)
+
+f7(runService.Heartbeat, function()
+  if not v5 or not v13.SpeedHack then
+    return
+  else
+    local character7 = localPlayer.Character
+    local humanoid6 = character7 and character7:FindFirstChildOfClass("Humanoid")
+
+    if humanoid6 then
+      humanoid6.WalkSpeed = v13.WalkSpeedValue
+    end
+
+    return
+  end
+end)
+
+runService.Stepped:Connect(function()
+  if not v5 then
+    return
+  end
+
+  if v13.NoClip then
+    local character8 = localPlayer.Character
+
+    if character8 then
+      for index10, value12 in ipairs(character8:GetDescendants()) do
+        if value12:IsA("BasePart") then
+          value12.CanCollide = false
+        end
+      end
+    end
+  end
+end)
+
+userInputService.JumpRequest:Connect(function()
+  if not v5 then
+    return
+  end
+
+  if v13.InfiniteJump then
+    local character9 = localPlayer.Character
+
+    if character9 then
+      local humanoid7 = character9:FindFirstChildOfClass("Humanoid")
+
+      if humanoid7 then
+        humanoid7:ChangeState(Enum.HumanoidStateType.Jumping)
+      end
+    end
+  end
+end)
+
+local v115 = {}
+
+local function f55(p87)
+  if p87 and v115[p87] == nil then
+    v115[p87] = p87.Size
+  end
+end
+
+local function f56(p88)
+  local v116 = p88 and v115[p88]
+
+  if p88 and p88.Parent and v116 then
+    p88.Size = v116
+  end
+
+  if p88 then
+    v115[p88] = nil
+  end
+end
+
+function f53()
+  if not v5 then
+    return
+  end
+
+  for index11, value13 in ipairs(players:GetPlayers()) do
+    if value13 ~= localPlayer and value13.Character then
+      local character10 = value13.Character
+      local head = character10:FindFirstChild("Head")
+      local humanoidRootPart4 = character10:FindFirstChild("HumanoidRootPart")
+
+      if head then
+        f55(head)
+
+        if v13.BigHead then
+          head.Size = Vector3.new(v13.BigHeadSize, v13.BigHeadSize, v13.BigHeadSize)
+          head.CanCollide = false
+
+          local specialMesh = head:FindFirstChildOfClass("SpecialMesh")
+
+          if specialMesh then
+            specialMesh.Scale = Vector3.new(v13.BigHeadSize, v13.BigHeadSize, v13.BigHeadSize)
+          end
+        else
+          f56(head)
+          local specialMesh2 = head:FindFirstChildOfClass("SpecialMesh")
+
+          if specialMesh2 then
+            specialMesh2.Scale = Vector3.new(1, 1, 1)
+          end
+        end
+      end
+
+      if humanoidRootPart4 then
+        f55(humanoidRootPart4)
+
+        if v13.HitboxExpander then
+          humanoidRootPart4.Size = Vector3.new(v13.HitboxSize, v13.HitboxSize, v13.HitboxSize)
+          humanoidRootPart4.Transparency = 0.7
+          humanoidRootPart4.CanCollide = false
+        else
+          f56(humanoidRootPart4)
+          humanoidRootPart4.Transparency = 1
+        end
+      end
+    end
+  end
+end
+
+f7(localPlayer.CharacterAdded, function()
+  task.wait(0.5)
+  f53()
+end)
+
+f7(players.PlayerAdded, function(p89)
+  f7(p89.CharacterAdded, function()
+    task.wait(0.5)
+    f53()
+  end)
+end)
+
+local v117 = {
+  W = false,
+  A = false,
+  S = false,
+  D = false,
+  Space = false,
+  LeftControl = false,
+}
+
+f7(userInputService.InputBegan, function(p90, p91)
+  if p91 then
+    return
+  elseif p90.UserInputType ~= Enum.UserInputType.Keyboard then
+    return
+  else
+    local keyCode = p90.KeyCode
+
+    if keyCode == Enum.KeyCode.W then
+      v117.W = true
+    elseif keyCode == Enum.KeyCode.A then
+      v117.A = true
+    elseif keyCode == Enum.KeyCode.S then
+      v117.S = true
+    elseif keyCode == Enum.KeyCode.D then
+      v117.D = true
+    elseif keyCode == Enum.KeyCode.Space then
+      v117.Space = true
+    elseif keyCode == Enum.KeyCode.LeftControl then
+      v117.LeftControl = true
+    end
+
+    return
+  end
+end)
+
+f7(userInputService.InputEnded, function(p92)
+  if p92.UserInputType ~= Enum.UserInputType.Keyboard then
+    return
+  else
+    local keyCode2 = p92.KeyCode
+
+    if keyCode2 == Enum.KeyCode.W then
+      v117.W = false
+    elseif keyCode2 == Enum.KeyCode.A then
+      v117.A = false
+    elseif keyCode2 == Enum.KeyCode.S then
+      v117.S = false
+    elseif keyCode2 == Enum.KeyCode.D then
+      v117.D = false
+    elseif keyCode2 == Enum.KeyCode.Space then
+      v117.Space = false
+    elseif keyCode2 == Enum.KeyCode.LeftControl then
+      v117.LeftControl = false
+    end
+
+    return
+  end
+end)
+
+f7(runService.RenderStepped, function(p93)
+  local unit2, unit3
+
+  if not v5 then
+    return
+  else
+    local character11 = localPlayer.Character
+
+    if not character11 then
+      return
+    else
+      local humanoidRootPart5 = character11:FindFirstChild("HumanoidRootPart")
+      local humanoid8 = character11:FindFirstChildOfClass("Humanoid")
+      local v118 = not humanoidRootPart5
+      local currentCamera10 = v1.CurrentCamera
+
+      if v118 or not humanoid8 or not currentCamera10 then
+        return
+      end
+
+      if v13.Fly then
+        local moveDirection = humanoid8.MoveDirection
+        local lookVector = currentCamera10.CFrame.LookVector
+        local rightVector = currentCamera10.CFrame.RightVector
+        local vector2 = Vector3.new(lookVector.X, 0, lookVector.Z)
+        local vector3 = Vector3.new(rightVector.X, 0, rightVector.Z)
+
+        if vector2.Magnitude > 0.001 then
+          unit2 = vector2.Unit
+        else
+          unit2 = Vector3.zero
+        end
+
+        if vector3.Magnitude > 0.001 then
+          unit3 = vector3.Unit
+        else
+          unit3 = Vector3.zero
+        end
+
+        local dot = moveDirection:Dot(unit2)
+        local dot2 = moveDirection:Dot(unit3)
+
+        if userInputService.KeyboardEnabled then
+          dot = (v117.W and 1 or 0) - (v117.S and 1 or 0)
+          dot2 = (v117.D and 1 or 0) - (v117.A and 1 or 0)
+        end
+
+        local v119 = 0
+
+        if v117.Space then
+          v119 = v119 + 1
+        end
+
+        if v117.LeftControl then
+          v119 = v119 - 1
+        end
+
+        local v120 = unit3 * dot2 + unit2 * dot + Vector3.new(0, v119, 0)
+        humanoid8.PlatformStand = true
+
+        humanoidRootPart5.AssemblyLinearVelocity = Vector3.zero
+        humanoidRootPart5.AssemblyAngularVelocity = Vector3.zero
+
+        if v120.Magnitude > 0.001 then
+          local unit4 = v120.Unit
+          local v121 = humanoidRootPart5.Position + unit4 * v13.FlySpeed * p93
+          humanoidRootPart5.CFrame = CFrame.new(v121, v121 + currentCamera10.CFrame.LookVector)
+        end
+      elseif humanoid8.PlatformStand then
+        humanoid8.PlatformStand = false
+      end
+
+      return
+    end
+  end
+end)
+
+local function f57()
+  local v122 = {}
+
+  for index12, value14 in ipairs(players:GetPlayers()) do
+    if value14 ~= localPlayer then
+      local v123, v124, v125 = f6(value14)
+
+      if v123 and v124 and v125 then
+        table.insert(v122, value14)
+      end
+    end
+  end
+
+  table.sort(v122, function(p94, p95)
+    return string.lower(p94.DisplayName) < string.lower(p95.DisplayName)
+  end)
+
+  return v122
+end
+
+local function f58(p96)
+  if not v13.TeleportEnabled then
+    f8("Enable teleport first")
+    return
+  end
+
+  if not p96 or p96 == localPlayer then
+    f8("Invalid player")
+    return
+  else
+    local v126, v127, v128 = f6(p96)
+    local character12 = localPlayer.Character
+    local humanoidRootPart6 = character12 and character12:FindFirstChild("HumanoidRootPart")
+
+    if not humanoidRootPart6 or not v128 then
+      f8("Player is no longer available")
+      return
+    end
+
+    humanoidRootPart6.CFrame = v128.CFrame + Vector3.new(0, 3, 0)
+    f8("Teleported to " .. p96.DisplayName)
+    return
+  end
+end
+
+local function f59(p97)
+  local textButton10 = Instance.new("TextButton")
+  textButton10.Size = UDim2.new(1, 0, 0, 42)
+  textButton10.BackgroundColor3 = Color3.fromRGB(23, 27, 37)
+  textButton10.BorderSizePixel = 0
+  textButton10.AutoButtonColor = false
+  textButton10.Text = ""
+  textButton10.Parent = scrollingFrame
+
+  Instance.new("UICorner", textButton10).CornerRadius = UDim.new(0, 8)
+
+  local textLabel24 = Instance.new("TextLabel")
+  textLabel24.Position = UDim2.fromOffset(12, 3)
+  textLabel24.Size = UDim2.new(1, -70, 0, 20)
+  textLabel24.BackgroundTransparency = 1
+  textLabel24.Text = p97.DisplayName
+  textLabel24.TextColor3 = Color3.fromRGB(230, 235, 245)
+  textLabel24.TextSize = 12
+  textLabel24.Font = Enum.Font.BuilderSansBold
+  textLabel24.TextXAlignment = Enum.TextXAlignment.Left
+  textLabel24.Parent = textButton10
+
+  local textLabel25 = Instance.new("TextLabel")
+  textLabel25.Position = UDim2.fromOffset(12, 21)
+  textLabel25.Size = UDim2.new(1, -70, 0, 15)
+  textLabel25.BackgroundTransparency = 1
+  textLabel25.Text = "@" .. p97.Name
+  textLabel25.TextColor3 = Color3.fromRGB(130, 140, 165)
+  textLabel25.TextSize = 10
+  textLabel25.Font = Enum.Font.BuilderSans
+  textLabel25.TextXAlignment = Enum.TextXAlignment.Left
+  textLabel25.Parent = textButton10
+
+  local textLabel26 = Instance.new("TextLabel")
+  textLabel26.AnchorPoint = Vector2.new(1, 0.5)
+  textLabel26.Position = UDim2.new(1, -10, 0.5, 0)
+  textLabel26.Size = UDim2.fromOffset(48, 24)
+  textLabel26.BackgroundColor3 = Color3.fromRGB(125, 65, 205)
+  textLabel26.BackgroundTransparency = 0
+  textLabel26.Text = "TP"
+  textLabel26.TextColor3 = Color3.new(1, 1, 1)
+  textLabel26.TextSize = 11
+  textLabel26.Font = Enum.Font.BuilderSansBold
+  textLabel26.Parent = textButton10
+
+  Instance.new("UICorner", textLabel26).CornerRadius = UDim.new(0, 6)
+  f7(textButton10.MouseButton1Click, function() f58(p97) end)
+  return textButton10
+end
+
+local cameraTPButton = nil
+
+local function f60()
+  if not cameraTPButton then
+    return
+  end
+
+  cameraTPButton.Visible = v13.ViewCameraTP
+
+  if v13.CameraTPActive then
+    cameraTPButton.Text = "TP CAM"
+    cameraTPButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    cameraTPButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+    if TPHereButton then
+      TPHereButton.Visible = v13.ViewCameraTP
+      TPHereButton.BackgroundColor3 = Color3.fromRGB(125, 65, 205)
+      TPHereButton.Text = "TP HERE"
+    end
+  else
+    cameraTPButton.Text = "TP CAM"
+    cameraTPButton.BackgroundColor3 = Color3.fromRGB(125, 65, 205)
+    cameraTPButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+    if TPHereButton then
+      TPHereButton.Visible = false
+    end
+  end
+end
+
+local v129 = 0
+local v130 = 0
+
+local function f61(p98)
+  local v131, v132 = p98.CFrame:ToOrientation()
+  v130 = math.clamp(v131, math.rad(-88), math.rad(88))
+  v129 = v132
+end
+
+local v133 = false
+
+local function f62()
+  local character13 = localPlayer.Character
+
+  if not character13 then
+    return nil, nil, nil
+  end
+
+  return character13, character13:FindFirstChildOfClass("Humanoid"), (character13:FindFirstChild("HumanoidRootPart"))
+end
+
+local v134, v135, position11
+
+local function f63()
+  if not v13.ViewCameraTP then
+    f8("Enable View Camera TP first")
+    return
+  else
+    local v136, v137, v138 = f62()
+    local currentCamera11 = v1.CurrentCamera
+
+    if not v137 or not v138 or not currentCamera11 then
+      f8("Character or camera unavailable")
+      return
+    end
+
+    if v13.CameraTPActive then
+      local position12 = currentCamera11.CFrame.Position
+      local lookVector2 = currentCamera11.CFrame.LookVector
+      local vector4 = Vector3.new(lookVector2.X, 0, lookVector2.Z)
+
+      if vector4.Magnitude < 0.001 then
+        vector4 = Vector3.new(v138.CFrame.LookVector.X, 0, v138.CFrame.LookVector.Z)
+      end
+
+      if vector4.Magnitude < 0.001 then
+        vector4 = Vector3.new(0, 0, -1)
+      end
+
+      v138.Anchored = false
+      v138.CFrame = CFrame.lookAt(position12, position12 + vector4.Unit)
+      v138.AssemblyLinearVelocity = Vector3.zero
+      v138.AssemblyAngularVelocity = Vector3.zero
+
+      v13.CameraTPActive = false
+
+      v137.PlatformStand = false
+      v137.AutoRotate = true
+
+      currentCamera11.CameraType = v13.CameraTPOriginalType or Enum.CameraType.Custom
+
+      if v13.CameraTPOriginalSubject and v13.CameraTPOriginalSubject.Parent then
+        currentCamera11.CameraSubject = v13.CameraTPOriginalSubject
+      else
+        currentCamera11.CameraSubject = v137
+      end
+
+      v13.CameraTPOriginalType = nil
+      v13.CameraTPOriginalSubject = nil
+      v13.CameraTPOriginalCFrame = nil
+
+      v134 = nil
+      v135 = nil
+      v133 = false
+      position11 = nil
+      f60()
+      f8("Teleported to camera position")
+      return
+    end
+
+    v13.CameraTPOriginalType = currentCamera11.CameraType
+    v13.CameraTPOriginalSubject = currentCamera11.CameraSubject
+    v13.CameraTPOriginalCFrame = currentCamera11.CFrame
+    v13.CameraTPActive = true
+
+    f61(currentCamera11)
+
+    v138.Anchored = true
+    v138.AssemblyLinearVelocity = Vector3.zero
+    v138.AssemblyAngularVelocity = Vector3.zero
+
+    v137.PlatformStand = false
+    v137.AutoRotate = false
+
+    currentCamera11.CameraType = Enum.CameraType.Scriptable
+    currentCamera11.CFrame = v13.CameraTPOriginalCFrame
+
+    f8("Camera TP active - joystick moves camera, swipe screen to look")
+    f60()
+    return
+  end
+end
+
+local function f64(p99)
+  local v139, v140, v141 = f62()
+  local currentCamera12 = v1.CurrentCamera
+  v13.CameraTPActive = false
+  v134 = nil
+  v135 = nil
+  v133 = false
+  position11 = nil
+
+  if v141 then
+    v141.Anchored = false
+    v141.AssemblyLinearVelocity = Vector3.zero
+    v141.AssemblyAngularVelocity = Vector3.zero
+  end
+
+  if v140 then
+    v140.PlatformStand = false
+    v140.AutoRotate = true
+  end
+
+  if p99 and currentCamera12 then
+    currentCamera12.CameraType = v13.CameraTPOriginalType or Enum.CameraType.Custom
+
+    if v13.CameraTPOriginalSubject and v13.CameraTPOriginalSubject.Parent then
+      currentCamera12.CameraSubject = v13.CameraTPOriginalSubject
+    elseif v140 then
+      currentCamera12.CameraSubject = v140
+    end
+  end
+
+  v13.CameraTPOriginalType = nil
+  v13.CameraTPOriginalSubject = nil
+  v13.CameraTPOriginalCFrame = nil
+
+  f60()
+end
+
+f7(userInputService.InputBegan, function(p100)
+  if not v13.CameraTPActive then
+    return
+  end
+
+  if p100.UserInputType == Enum.UserInputType.Touch then
+    local currentCamera13 = v1.CurrentCamera
+
+    local viewportSize4 = currentCamera13 and currentCamera13.ViewportSize
+      or Vector2.new(800, 600)
+
+    local position13 = p100.Position
+
+    if position13.X >= viewportSize4.X * 0.552 then
+      v134 = p100
+      v135 = position13
+    end
+  elseif p100.UserInputType == Enum.UserInputType.MouseButton2 then
+    v133 = true
+    position11 = p100.Position
+  end
+end)
+
+f7(userInputService.InputChanged, function(p101)
+  if not v13.CameraTPActive then
+    return
+  end
+
+  if p101.UserInputType == Enum.UserInputType.MouseMovement and v133 then
+    local position14 = p101.Position
+
+    if position11 then
+      local v142 = position14 - position11
+      v129 = v129 - v142.X * v13.CameraTPSensitivity * 0.01
+
+      v130 = math.clamp(
+        v130 - v142.Y * v13.CameraTPSensitivity * 0.01, math.rad(-88), math.rad(88)
+      )
+    end
+
+    position11 = position14
+  end
+end)
+
+f7(userInputService.TouchMoved, function(p102, p103)
+  if not v13.CameraTPActive or p102 ~= v134 then
+    return
+  else
+    local position15 = p102.Position
+
+    if v135 then
+      local v143 = position15 - v135
+      v129 = v129 - v143.X * v13.CameraTPSensitivity * 0.01
+
+      v130 = math.clamp(
+        v130 - v143.Y * v13.CameraTPSensitivity * 0.01, math.rad(-88), math.rad(88)
+      )
+    end
+
+    v135 = position15
+    return
+  end
+end)
+
+f7(userInputService.InputEnded, function(p104)
+  if p104 == v134 then
+    v134 = nil
+    v135 = nil
+  elseif p104.UserInputType == Enum.UserInputType.MouseButton2 then
+    v133 = false
+    position11 = nil
+  end
+end)
+
+f7(runService.RenderStepped, function(p105)
+  local v144 = not v5 or not v13.CameraTPActive
+  local unit5, unit6
+
+  if v144 then
+    return
+  else
+    local v145, v146, v147 = f62()
+    local currentCamera14 = v1.CurrentCamera
+
+    if not v146 or not v147 or not currentCamera14 then
+      f64(true)
+      return
+    else
+      v147.Anchored = true
+      v147.AssemblyLinearVelocity = Vector3.zero
+      v147.AssemblyAngularVelocity = Vector3.zero
+
+      v146.AutoRotate = false
+      local cframe = CFrame.Angles(0, v129, 0)
+      local cframe2 = CFrame.Angles(v130, 0, 0)
+      currentCamera14.CFrame = CFrame.new(currentCamera14.CFrame.Position) * (cframe * cframe2)
+      local moveDirection2 = v146.MoveDirection
+
+      if moveDirection2.Magnitude > 0.001 then
+        local lookVector3 = currentCamera14.CFrame.LookVector
+        local rightVector2 = currentCamera14.CFrame.RightVector
+        local vector5 = Vector3.new(rightVector2.X, 0, rightVector2.Z)
+
+        if vector5.Magnitude > 0.001 then
+          unit5 = vector5.Unit
+        else
+          unit5 = Vector3.new(1, 0, 0)
+        end
+
+        local vector6 = Vector3.new(lookVector3.X, 0, lookVector3.Z)
+
+        if vector6.Magnitude > 0.001 then
+          unit6 = vector6.Unit
+        else
+          unit6 = Vector3.new(0, 0, -1)
+        end
+
+        local dot3 = moveDirection2:Dot(unit6)
+        local v148 = unit5 * moveDirection2:Dot(unit5) + lookVector3 * dot3
+
+        if v148.Magnitude > 0.001 then
+          local unit7 = v148.Unit
+
+          currentCamera14.CFrame = currentCamera14.CFrame
+            + unit7 * math.max(v13.CameraTPSpeed, 1) * p105
+        end
+      end
+
+      return
+    end
+  end
+end)
+
+f7(localPlayer.CharacterAdded, function()
+  if v13.CameraTPActive then
+    task.defer(function() f64(true) end)
+  end
+end)
+
+local function f65()
+  if cameraTPButton and cameraTPButton.Parent then
+    return
+  end
+
+  cameraTPButton = Instance.new("TextButton")
+  cameraTPButton.Name = "CameraTPButton"
+  cameraTPButton.AnchorPoint = Vector2.new(0, 1)
+  cameraTPButton.Position = UDim2.new(0, 135, 1, -15)
+  cameraTPButton.Size = UDim2.fromOffset(105, 48)
+  cameraTPButton.BackgroundColor3 = Color3.fromRGB(125, 65, 205)
+  cameraTPButton.BorderSizePixel = 0
+  cameraTPButton.AutoButtonColor = false
+  cameraTPButton.Text = "TP CAM"
+  cameraTPButton.TextColor3 = Color3.new(1, 1, 1)
+  cameraTPButton.TextSize = 11
+  cameraTPButton.Font = Enum.Font.BuilderSansBold
+  cameraTPButton.Visible = v13.ViewCameraTP
+  cameraTPButton.ZIndex = 100
+  cameraTPButton.Parent = playerVisualizationTool2
+
+  Instance.new("UICorner", cameraTPButton).CornerRadius = UDim.new(0, 12)
+  local v149 = false
+  local position16 = nil
+  local position17 = nil
+  local v150 = false
+
+  f7(cameraTPButton.InputBegan, function(p106)
+    if v13.CameraTPButtonLocked then
+      return
+    end
+
+    local connect4
+
+    if p106.UserInputType == Enum.UserInputType.MouseButton1
+      or p106.UserInputType == Enum.UserInputType.Touch then
+      v149 = true
+      v150 = false
+      position16 = p106.Position
+      position17 = cameraTPButton.Position
+
+      connect4 = nil
+
+      connect4 = p106.Changed:Connect(function()
+        if p106.UserInputState == Enum.UserInputState.End then
+          v149 = false
+          connect4:Disconnect()
+        end
+      end)
+    end
+  end)
+
+  f7(userInputService.InputChanged, function(p107)
+    if v149
+      and (p107.UserInputType == Enum.UserInputType.MouseMovement
+        or p107.UserInputType == Enum.UserInputType.Touch) then
+      local v151 = p107.Position - position16
+
+      if math.abs(v151.X) > 4 or math.abs(v151.Y) > 4 then
+        v150 = true
+      end
+
+      local udim3 = UDim2.new(
+        position17.X.Scale, position17.X.Offset + v151.X, position17.Y.Scale,
+        position17.Y.Offset + v151.Y
+      )
+
+      cameraTPButton.Position = cameraTPButton.Position:Lerp(udim3, 0.32)
+    end
+  end)
+
+  f7(cameraTPButton.MouseButton1Click, function()
+    if v150 then
+      v150 = false
+      return
+    end
+
+    f63()
+  end)
+end
+
+f65()
+
+local f66
+
+local function f67(p108)
+  if not v13.SpectateEnabled then
+    f8("Enable spectate first")
+    return
+  end
+
+  if not p108 or p108 == localPlayer then
+    f8("Invalid spectate target")
+    return
+  else
+    local v152, v153 = f6(p108)
+
+    if not v152 or not v153 then
+      f8("Player is not available")
+      return
+    else
+      local currentCamera15 = v1.CurrentCamera
+
+      if not currentCamera15 then
+        f8("Camera is not available")
+        return
+      end
+
+      v13.SpectateTarget = p108
+      v13.SpectateActive = true
+
+      currentCamera15.CameraType = Enum.CameraType.Custom
+      currentCamera15.CameraSubject = v153
+
+      if f66 then
+        f66()
+      end
+
+      f8("Spectating " .. p108.DisplayName)
+      return
+    end
+  end
+end
+
+local function f68(p109)
+  local currentCamera16 = v1.CurrentCamera
+
+  if currentCamera16 then
+    local character14 = localPlayer.Character
+    local humanoid9 = character14 and character14:FindFirstChildOfClass("Humanoid")
+    currentCamera16.CameraType = Enum.CameraType.Custom
+
+    if humanoid9 then
+      currentCamera16.CameraSubject = humanoid9
+    end
+  end
+
+  v13.SpectateActive = false
+  v13.SpectateTarget = nil
+
+  if p109 then
+    v13.SpectateEnabled = false
+  end
+
+  if f66 then
+    f66()
+  end
+end
+
+local function f69(p110, p111)
+  local parent3 = p111 or scrollingFrame
+
+  local frame24 = Instance.new("Frame")
+  frame24.Size = UDim2.new(1, 0, 0, 42)
+  frame24.BackgroundColor3 = Color3.fromRGB(23, 27, 37)
+  frame24.BorderSizePixel = 0
+  frame24.Parent = parent3
+
+  Instance.new("UICorner", frame24).CornerRadius = UDim.new(0, 8)
+
+  local textLabel27 = Instance.new("TextLabel")
+  textLabel27.Position = UDim2.fromOffset(12, 3)
+  textLabel27.Size = UDim2.new(1, -112, 0, 20)
+  textLabel27.BackgroundTransparency = 1
+  textLabel27.Text = p110.DisplayName
+  textLabel27.TextColor3 = Color3.fromRGB(230, 235, 245)
+  textLabel27.TextSize = 12
+  textLabel27.Font = Enum.Font.BuilderSansBold
+  textLabel27.TextXAlignment = Enum.TextXAlignment.Left
+  textLabel27.Parent = frame24
+
+  local textLabel28 = Instance.new("TextLabel")
+  textLabel28.Position = UDim2.fromOffset(12, 21)
+  textLabel28.Size = UDim2.new(1, -112, 0, 15)
+  textLabel28.BackgroundTransparency = 1
+  textLabel28.Text = "@" .. p110.Name
+  textLabel28.TextColor3 = Color3.fromRGB(130, 140, 165)
+  textLabel28.TextSize = 10
+  textLabel28.Font = Enum.Font.BuilderSans
+  textLabel28.TextXAlignment = Enum.TextXAlignment.Left
+  textLabel28.Parent = frame24
+
+  local textButton11 = Instance.new("TextButton")
+  textButton11.AnchorPoint = Vector2.new(1, 0.5)
+  textButton11.Position = UDim2.new(1, -10, 0.5, 0)
+  textButton11.Size = UDim2.fromOffset(76, 26)
+  textButton11.BackgroundColor3 = Color3.fromRGB(125, 65, 205)
+  textButton11.BorderSizePixel = 0
+  textButton11.AutoButtonColor = false
+  textButton11.Text = "SPECTATE"
+  textButton11.TextColor3 = Color3.new(1, 1, 1)
+  textButton11.TextSize = 9
+  textButton11.Font = Enum.Font.BuilderSansBold
+  textButton11.Parent = frame24
+
+  Instance.new("UICorner", textButton11).CornerRadius = UDim.new(0, 7)
+  f7(textButton11.MouseButton1Click, function() f67(p110) end)
+  return frame24
+end
+
+f7(runService.RenderStepped, function()
+  if not v5 or not v13.SpectateActive then
+    return
+  else
+    local spectateTarget = v13.SpectateTarget
+    local currentCamera17 = v1.CurrentCamera
+
+    if not spectateTarget or spectateTarget.Parent ~= players or not currentCamera17 then
+      f68()
+      return
+    else
+      local v154, v155 = f6(spectateTarget)
+
+      if v155 and v155.Parent then
+        currentCamera17.CameraType = Enum.CameraType.Custom
+        currentCamera17.CameraSubject = v155
+      end
+
+      return
+    end
+  end
+end)
+
+f7(players.PlayerRemoving, function(p112)
+  if v13.SpectateTarget == p112 then
+    f68()
+    f8("Spectate target left the server")
+  end
+end)
+
+f7(localPlayer.CharacterAdded, function()
+  if not v13.SpectateActive then
+    task.wait(0.1)
+    local currentCamera18 = v1.CurrentCamera
+    local character15 = localPlayer.Character
+    local humanoid10 = character15 and character15:FindFirstChildOfClass("Humanoid")
+
+    if currentCamera18 and humanoid10 then
+      currentCamera18.CameraType = Enum.CameraType.Custom
+      currentCamera18.CameraSubject = humanoid10
+    end
+  end
+end)
+
+local function f70()
+  f31()
+  f17("Camera TP")
+
+  local frame25 = Instance.new("Frame")
+  frame25.Size = UDim2.new(1, 0, 0, 42)
+  frame25.BackgroundTransparency = 1
+  frame25.Parent = scrollingFrame
+
+  local textButton12 = Instance.new("TextButton")
+  textButton12.Size = UDim2.new(1, 0, 0, 42)
+  textButton12.BackgroundColor3 = Color3.fromRGB(23, 27, 37)
+  textButton12.BorderSizePixel = 0
+  textButton12.AutoButtonColor = false
+  textButton12.Text = ""
+  textButton12.Parent = frame25
+
+  Instance.new("UICorner", textButton12).CornerRadius = UDim.new(0, 8)
+
+  local frame26 = Instance.new("Frame")
+  frame26.Position = UDim2.fromOffset(10, 12)
+  frame26.Size = UDim2.fromOffset(18, 18)
+
+  frame26.BackgroundColor3 = v13.ViewCameraTP and Color3.fromRGB(45, 180, 95)
+    or Color3.fromRGB(38, 43, 56)
+
+  frame26.BorderSizePixel = 0
+  frame26.Parent = textButton12
+
+  Instance.new("UICorner", frame26).CornerRadius = UDim.new(0, 5)
+
+  local textLabel29 = Instance.new("TextLabel")
+  textLabel29.Size = UDim2.fromScale(1, 1)
+  textLabel29.BackgroundTransparency = 1
+  textLabel29.Text = v13.ViewCameraTP and "✓" or ""
+  textLabel29.TextColor3 = Color3.new(1, 1, 1)
+  textLabel29.Font = Enum.Font.BuilderSansBold
+  textLabel29.TextSize = 13
+  textLabel29.Parent = frame26
+
+  local textLabel30 = Instance.new("TextLabel")
+  textLabel30.Position = UDim2.fromOffset(38, 0)
+  textLabel30.Size = UDim2.new(1, -82, 1, 0)
+  textLabel30.BackgroundTransparency = 1
+  textLabel30.Text = "View Camera TP"
+  textLabel30.TextColor3 = Color3.fromRGB(220, 225, 235)
+  textLabel30.TextSize = 13
+  textLabel30.Font = Enum.Font.BuilderSansMedium
+  textLabel30.TextXAlignment = Enum.TextXAlignment.Left
+  textLabel30.Parent = textButton12
+
+  local textButton13 = Instance.new("TextButton")
+  textButton13.AnchorPoint = Vector2.new(1, 0.5)
+  textButton13.Position = UDim2.new(1, -8, 0.5, 0)
+  textButton13.Size = UDim2.fromOffset(34, 32)
+  textButton13.BackgroundColor3 = Color3.fromRGB(35, 27, 48)
+  textButton13.BorderSizePixel = 0
+  textButton13.AutoButtonColor = false
+  textButton13.Text = "›"
+  textButton13.TextColor3 = Color3.fromRGB(205, 175, 245)
+  textButton13.TextSize = 21
+  textButton13.Font = Enum.Font.BuilderSansBold
+  textButton13.Parent = textButton12
+
+  Instance.new("UICorner", textButton13).CornerRadius = UDim.new(0, 8)
+
+  local textButton14 = Instance.new("TextButton")
+  textButton14.Position = UDim2.fromOffset(0, 47)
+  textButton14.Size = UDim2.new(1, 0, 0, 38)
+  textButton14.BackgroundColor3 = Color3.fromRGB(27, 23, 38)
+  textButton14.BorderSizePixel = 0
+  textButton14.AutoButtonColor = false
+  textButton14.Text = ""
+  textButton14.Visible = false
+  textButton14.Parent = frame25
+
+  Instance.new("UICorner", textButton14).CornerRadius = UDim.new(0, 8)
+
+  local frame27 = Instance.new("Frame")
+  frame27.Position = UDim2.fromOffset(10, 10)
+  frame27.Size = UDim2.fromOffset(18, 18)
+
+  frame27.BackgroundColor3 = v13.CameraTPButtonLocked and Color3.fromRGB(45, 180, 95)
+    or Color3.fromRGB(38, 43, 56)
+
+  frame27.BorderSizePixel = 0
+  frame27.Parent = textButton14
+
+  Instance.new("UICorner", frame27).CornerRadius = UDim.new(0, 5)
+
+  local textLabel31 = Instance.new("TextLabel")
+  textLabel31.Size = UDim2.fromScale(1, 1)
+  textLabel31.BackgroundTransparency = 1
+  textLabel31.Text = v13.CameraTPButtonLocked and "✓" or ""
+  textLabel31.TextColor3 = Color3.new(1, 1, 1)
+  textLabel31.Font = Enum.Font.BuilderSansBold
+  textLabel31.TextSize = 13
+  textLabel31.Parent = frame27
+
+  local textLabel32 = Instance.new("TextLabel")
+  textLabel32.Position = UDim2.fromOffset(38, 0)
+  textLabel32.Size = UDim2.new(1, -50, 1, 0)
+  textLabel32.BackgroundTransparency = 1
+  textLabel32.Text = "Lock Camera TP button"
+  textLabel32.TextColor3 = Color3.fromRGB(205, 210, 225)
+  textLabel32.TextSize = 12
+  textLabel32.Font = Enum.Font.BuilderSansMedium
+  textLabel32.TextXAlignment = Enum.TextXAlignment.Left
+  textLabel32.Parent = textButton14
+
+  local v156 = false
+
+  local function f71()
+    frame26.BackgroundColor3 = v13.ViewCameraTP and Color3.fromRGB(45, 180, 95)
+      or Color3.fromRGB(38, 43, 56)
+
+    textLabel29.Text = v13.ViewCameraTP and "✓" or ""
+    textButton14.Visible = v13.ViewCameraTP and v156
+    frame25.Size = UDim2.new(1, 0, 0, textButton14.Visible and 89 or 42)
+    textButton13.Text = v156 and "⌄" or "›"
+
+    frame27.BackgroundColor3 = v13.CameraTPButtonLocked and Color3.fromRGB(45, 180, 95)
+      or Color3.fromRGB(38, 43, 56)
+
+    textLabel31.Text = v13.CameraTPButtonLocked and "✓" or ""
+  end
+
+  f7(textButton12.MouseButton1Click, function()
+    v13.ViewCameraTP = not v13.ViewCameraTP
+
+    if not v13.ViewCameraTP then
+      v156 = false
+
+      if v13.CameraTPActive then
+        f64(true)
+      end
+    end
+
+    f71()
+    f60()
+    f8(v13.ViewCameraTP and "View Camera TP enabled" or "View Camera TP disabled")
+  end)
+
+  f7(textButton13.MouseButton1Click, function()
+    if not v13.ViewCameraTP then
+      return
+    end
+
+    v156 = not v156
+    f71()
+  end)
+
+  f7(textButton14.MouseButton1Click, function()
+    v13.CameraTPButtonLocked = not v13.CameraTPButtonLocked
+    f71()
+    f8(v13.CameraTPButtonLocked and "Camera TP button locked" or "Camera TP button unlocked")
+  end)
+
+  f71()
+
+  f18("Camera TP Speed", 1, 200, 1, 140, function(cameraTPSpeed)
+    v13.CameraTPSpeed = cameraTPSpeed
+  end)
+
+  v13.CameraTPSpeed = 140
+  f17("Teleport to Player & Spectate Player")
+  local frame28, frame29
+
+  f16("Teleport to player", v13.TeleportEnabled, function(p113)
+    v13.TeleportEnabled = p113
+
+    if p113 then
+      f8("Teleport to player enabled")
+    else
+      if frame28 then
+        frame28.Visible = false
+      end
+
+      if frame29 then
+        frame29.Visible = false
+      end
+
+      f8("Teleport to player disabled")
+    end
+
+    task.defer(function()
+      if v57 == "Teleport" then
+        f28("Teleport", f70)
+      end
+    end)
+  end)
+
+  local f72, textButton15
+
+  if v13.TeleportEnabled then
+    f17("Teleport Players")
+
+    frame29 = Instance.new("Frame")
+    frame29.Size = UDim2.new(1, 0, 0, 34)
+    frame29.BackgroundTransparency = 1
+    frame29.Parent = scrollingFrame
+
+    textButton15 = Instance.new("TextButton")
+    textButton15.Size = UDim2.new(1, 0, 1, 0)
+    textButton15.BackgroundColor3 = Color3.fromRGB(35, 29, 48)
+    textButton15.BorderSizePixel = 0
+    textButton15.AutoButtonColor = false
+    textButton15.Text = "↻  Refresh Players"
+    textButton15.TextColor3 = Color3.fromRGB(220, 205, 245)
+    textButton15.TextSize = 12
+    textButton15.Font = Enum.Font.BuilderSansBold
+    textButton15.Parent = frame29
+
+    Instance.new("UICorner", textButton15).CornerRadius = UDim.new(0, 8)
+
+    frame28 = Instance.new("Frame")
+    frame28.Size = UDim2.new(1, 0, 0, 0)
+    frame28.AutomaticSize = Enum.AutomaticSize.Y
+    frame28.BackgroundTransparency = 1
+    frame28.Parent = scrollingFrame
+
+    local uiListLayout4 = Instance.new("UIListLayout")
+    uiListLayout4.Padding = UDim.new(0, 8)
+    uiListLayout4.SortOrder = Enum.SortOrder.LayoutOrder
+    uiListLayout4.Parent = frame28
+
+    function f72(p114)
+      for index13, value15 in ipairs(frame28:GetChildren()) do
+        if not value15:IsA("UIListLayout") then
+          value15:Destroy()
+        end
+      end
+
+      if not v13.TeleportEnabled then
+        frame28.Visible = false
+        return
+      else
+        frame28.Visible = true
+        local v157 = f57()
+
+        if #v157 == 0 then
+          local textLabel33 = Instance.new("TextLabel")
+          textLabel33.Size = UDim2.new(1, 0, 0, 42)
+          textLabel33.BackgroundColor3 = Color3.fromRGB(23, 27, 37)
+          textLabel33.BorderSizePixel = 0
+          textLabel33.Text = "No players available to teleport"
+          textLabel33.TextColor3 = Color3.fromRGB(140, 150, 175)
+          textLabel33.TextSize = 12
+          textLabel33.Font = Enum.Font.BuilderSansMedium
+          textLabel33.Parent = frame28
+
+          Instance.new("UICorner", textLabel33).CornerRadius = UDim.new(0, 8)
+        else
+          for index14, value16 in ipairs(v157) do
+            local getChildren = scrollingFrame:GetChildren()
+            f59(value16)
+            local v158 = nil
+
+            for index15, value17 in ipairs(scrollingFrame:GetChildren()) do
+              if value17:IsA("TextButton") and value17 ~= textButton15
+                and not table.find(getChildren, value17) then
+                v158 = value17
+                break
+              end
+            end
+
+            if v158 then
+              v158.Parent = frame28
+            end
+          end
+        end
+
+        if p114 then
+          f8("Teleport player list refreshed")
+        end
+
+        return
+      end
+    end
+
+    f7(textButton15.MouseButton1Click, function() f72(true) end)
+    f72(false)
+  end
+
+  f16("Spectate to player", v13.SpectateEnabled, function(p115)
+    v13.SpectateEnabled = p115
+
+    if not p115 then
+      f68(false)
+      f8("Spectate to player disabled")
+    else
+      f8("Spectate to player enabled")
+    end
+
+    task.defer(function()
+      if v57 == "Teleport" then
+        f28("Teleport", f70)
+      end
+    end)
+  end)
+
+  local frame30, f73, textButton16
+
+  if v13.SpectateEnabled then
+    f17("Spectate Players")
+
+    textButton16 = Instance.new("TextButton")
+    textButton16.Size = UDim2.new(1, 0, 0, 40)
+    textButton16.BackgroundColor3 = Color3.fromRGB(125, 65, 205)
+    textButton16.BorderSizePixel = 0
+    textButton16.AutoButtonColor = false
+    textButton16.Text = "STOP SPECTATING"
+    textButton16.TextColor3 = Color3.new(1, 1, 1)
+    textButton16.TextSize = 11
+    textButton16.Font = Enum.Font.BuilderSansBold
+    textButton16.Visible = v13.SpectateActive
+    textButton16.Parent = scrollingFrame
+
+    Instance.new("UICorner", textButton16).CornerRadius = UDim.new(0, 8)
+
+    function f66()
+      if textButton16 and textButton16.Parent then
+        textButton16.Visible = v13.SpectateActive
+      end
+    end
+
+    f7(textButton16.MouseButton1Click, function()
+      if v13.SpectateActive then
+        f68(false)
+        f8("Stopped spectating")
+      end
+    end)
+
+    local frame31 = Instance.new("Frame")
+    frame31.Size = UDim2.new(1, 0, 0, 34)
+    frame31.BackgroundTransparency = 1
+    frame31.Parent = scrollingFrame
+
+    local textButton17 = Instance.new("TextButton")
+    textButton17.Size = UDim2.new(1, 0, 1, 0)
+    textButton17.BackgroundColor3 = Color3.fromRGB(35, 29, 48)
+    textButton17.BorderSizePixel = 0
+    textButton17.AutoButtonColor = false
+    textButton17.Text = "↻  Refresh Players"
+    textButton17.TextColor3 = Color3.fromRGB(220, 205, 245)
+    textButton17.TextSize = 12
+    textButton17.Font = Enum.Font.BuilderSansBold
+    textButton17.Parent = frame31
+
+    Instance.new("UICorner", textButton17).CornerRadius = UDim.new(0, 8)
+
+    frame30 = Instance.new("Frame")
+    frame30.Size = UDim2.new(1, 0, 0, 0)
+    frame30.AutomaticSize = Enum.AutomaticSize.Y
+    frame30.BackgroundTransparency = 1
+    frame30.Parent = scrollingFrame
+
+    local uiListLayout5 = Instance.new("UIListLayout")
+    uiListLayout5.Padding = UDim.new(0, 8)
+    uiListLayout5.SortOrder = Enum.SortOrder.LayoutOrder
+    uiListLayout5.Parent = frame30
+
+    function f73(p116)
+      for index16, value18 in ipairs(frame30:GetChildren()) do
+        if not value18:IsA("UIListLayout") then
+          value18:Destroy()
+        end
+      end
+
+      if not v13.SpectateEnabled then
+        frame30.Visible = false
+        return
+      else
+        frame30.Visible = true
+        local v159 = f57()
+
+        if #v159 == 0 then
+          local textLabel34 = Instance.new("TextLabel")
+          textLabel34.Size = UDim2.new(1, 0, 0, 42)
+          textLabel34.BackgroundColor3 = Color3.fromRGB(23, 27, 37)
+          textLabel34.BorderSizePixel = 0
+          textLabel34.Text = "No players available to spectate"
+          textLabel34.TextColor3 = Color3.fromRGB(140, 150, 175)
+          textLabel34.TextSize = 12
+          textLabel34.Font = Enum.Font.BuilderSansMedium
+          textLabel34.Parent = frame30
+
+          Instance.new("UICorner", textLabel34).CornerRadius = UDim.new(0, 8)
+        else
+          for index17, value19 in ipairs(v159) do
+            f69(value19, frame30)
+          end
+        end
+
+        if p116 then
+          f8("Spectate player list refreshed")
+        end
+
+        return
+      end
+    end
+
+    f7(textButton17.MouseButton1Click, function() f73(true) end)
+    f73(false)
+  end
+
+  task.spawn(function()
+    local v160 = ""
+
+    while scrollingFrame.Parent do
+      if v57 ~= "Teleport" then
+        break
+      else
+        local v161 = {}
+
+        for index18, value20 in ipairs(f57()) do
+          table.insert(v161, value20.UserId .. ":" .. value20.Name)
+        end
+
+        table.sort(v161)
+        local v162 = table.concat(v161, "|")
+
+        if v162 ~= v160 then
+          v160 = v162
+
+          if v13.TeleportEnabled and f72 then
+            f72(false)
+          end
+
+          if v13.SpectateEnabled and f73 then
+            f73(false)
+          end
+        end
+
+        task.wait(1)
+      end
+    end
+  end)
+end
+
+local f74
+
+local function f75(text8, text9, p117)
+  local frame32 = Instance.new("Frame")
+  frame32.Size = UDim2.new(1, 0, 0, 58)
+  frame32.BackgroundColor3 = Color3.fromRGB(23, 27, 37)
+  frame32.BorderSizePixel = 0
+  frame32.Parent = scrollingFrame
+
+  Instance.new("UICorner", frame32).CornerRadius = UDim.new(0, 8)
+
+  local textLabel35 = Instance.new("TextLabel")
+  textLabel35.Position = UDim2.fromOffset(12, 6)
+  textLabel35.Size = UDim2.new(1, -84, 0, 20)
+  textLabel35.BackgroundTransparency = 1
+  textLabel35.Text = text8
+  textLabel35.TextColor3 = Color3.fromRGB(230, 235, 245)
+  textLabel35.TextSize = 12
+  textLabel35.Font = Enum.Font.BuilderSansBold
+  textLabel35.TextXAlignment = Enum.TextXAlignment.Left
+  textLabel35.Parent = frame32
+
+  local textBox2 = Instance.new("TextBox")
+  textBox2.Position = UDim2.fromOffset(12, 28)
+  textBox2.Size = UDim2.new(1, -84, 0, 22)
+  textBox2.BackgroundTransparency = 1
+  textBox2.ClearTextOnFocus = false
+  textBox2.Text = text9
+  textBox2.TextColor3 = Color3.fromRGB(140, 150, 175)
+  textBox2.TextSize = 10
+  textBox2.Font = Enum.Font.BuilderSans
+  textBox2.TextXAlignment = Enum.TextXAlignment.Left
+  textBox2.TextTruncate = Enum.TextTruncate.AtEnd
+  textBox2.Parent = frame32
+
+  local textButton18 = Instance.new("TextButton")
+  textButton18.AnchorPoint = Vector2.new(1, 0.5)
+  textButton18.Position = UDim2.new(1, -10, 0.5, 0)
+  textButton18.Size = UDim2.fromOffset(58, 28)
+  textButton18.BackgroundColor3 = Color3.fromRGB(125, 65, 205)
+  textButton18.BorderSizePixel = 0
+  textButton18.AutoButtonColor = false
+  textButton18.Text = "COPY"
+  textButton18.TextColor3 = Color3.new(1, 1, 1)
+  textButton18.TextSize = 10
+  textButton18.Font = Enum.Font.BuilderSansBold
+  textButton18.Parent = frame32
+
+  Instance.new("UICorner", textButton18).CornerRadius = UDim.new(0, 6)
+  f7(textButton18.MouseButton1Click, function() f74(textBox2.Text, p117) end)
+  return frame32
+end
+
+function f74(p118, p119)
+  if not p118 or p118 == "" or p118:find("PASTE_") then
+    f8("Set your " .. p119 .. " link first")
+    return
+  end
+
+  if typeof(setclipboard) == "function" then
+    setclipboard(p118)
+    f8(p119 .. " link copied")
+  else
+    f8("Select the link and copy it")
+  end
+end
+
+f7(localPlayer.CharacterAdded, function(p120)
+  task.defer(function()
+    local waitForChild2 = p120:WaitForChild("Humanoid", 5)
+
+    if not waitForChild2 or not v5 then
+      return
+    end
+
+    if v13.SpeedHack then
+      waitForChild2:SetAttribute("MASTERSAMOriginalWalkSpeed", waitForChild2.WalkSpeed)
+      waitForChild2.WalkSpeed = v13.WalkSpeedValue
+    end
+
+    if v13.Fly then
+      waitForChild2.PlatformStand = true
+    end
+  end)
+end)
+
+local function f76()
+  f31()
+
+  f75("Discord", v13.DiscordLink, "Discord")
+  f75("TIKTOK", v13.TikTokLink, "TikTok")
+  f75("YOUTUBE", v13.YouTubeLink, "YouTube")
+
+  f17("UPCOMING FEATURES")
+
+  for index19, value21 in ipairs({ "Team Check", "Rapid Fire", "Fast Reload" }) do
+    local textLabel36 = Instance.new("TextLabel")
+    textLabel36.Size = UDim2.new(1, 0, 0, 28)
+    textLabel36.BackgroundColor3 = Color3.fromRGB(23, 27, 37)
+    textLabel36.BorderSizePixel = 0
+    textLabel36.Text = "• " .. value21
+    textLabel36.TextColor3 = Color3.fromRGB(190, 195, 210)
+    textLabel36.TextSize = 11
+    textLabel36.Font = Enum.Font.BuilderSans
+    textLabel36.TextXAlignment = Enum.TextXAlignment.Left
+    textLabel36.Parent = scrollingFrame
+
+    Instance.new("UICorner", textLabel36).CornerRadius = UDim.new(0, 7)
+
+    local uiPadding2 = Instance.new("UIPadding")
+    uiPadding2.PaddingLeft = UDim.new(0, 12)
+    uiPadding2.Parent = textLabel36
+  end
+end
+
+f7(v59.MouseButton1Click, function() f28("Main", f51) end)
+f7(v60.MouseButton1Click, function() f28("ESP", f50) end)
+f7(v61.MouseButton1Click, function() f28("Mics", f54) end)
+f7(v62.MouseButton1Click, function() f28("Teleport", f70) end)
+f7(v63.MouseButton1Click, function() f28("About", f76) end)
+
+f28("Main", f51)
+
+local function f77(p121)
+  local v163 = v16[p121]
+
+  if not v163 then
+    return
+  end
+
+  for key4, value22 in pairs(v163) do
+    if typeof(value22) == "Instance" and value22.Parent then
+      value22:Destroy()
+    end
+  end
+
+  v16[p121] = nil
+end
+
+local function f78(p122)
+  if p122 == localPlayer then
+    return
+  else
+    f77(p122)
+
+    local playerToolBox = Instance.new("Highlight")
+    playerToolBox.Name = "PlayerToolBox"
+    playerToolBox.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    playerToolBox.FillTransparency = 1
+    playerToolBox.OutlineTransparency = 0
+    playerToolBox.Enabled = false
+    playerToolBox.Parent = playerVisualizationTool2
+
+    local playerToolTag = Instance.new("BillboardGui")
+    playerToolTag.Name = "PlayerToolTag"
+    playerToolTag.Size = UDim2.fromOffset(170, 70)
+    playerToolTag.StudsOffset = Vector3.new(0, 3, 0)
+    playerToolTag.AlwaysOnTop = true
+    playerToolTag.Enabled = false
+    playerToolTag.Parent = playerVisualizationTool2
+
+    local frame33 = Instance.new("Frame")
+    frame33.Size = UDim2.fromScale(1, 1)
+    frame33.BackgroundTransparency = 1
+    frame33.Parent = playerToolTag
+
+    local name2 = Instance.new("TextLabel")
+    name2.Name = "Name"
+    name2.Size = UDim2.new(1, 0, 0, 22)
+    name2.BackgroundTransparency = 1
+    name2.TextColor3 = Color3.new(1, 1, 1)
+    name2.TextStrokeTransparency = 0.4
+    name2.Font = Enum.Font.BuilderSansBold
+    name2.TextSize = 13
+    name2.Parent = frame33
+
+    local distance2 = Instance.new("TextLabel")
+    distance2.Name = "Distance"
+    distance2.Position = UDim2.fromOffset(0, 20)
+    distance2.Size = UDim2.new(1, 0, 0, 18)
+    distance2.BackgroundTransparency = 1
+    distance2.TextColor3 = Color3.fromRGB(205, 210, 220)
+    distance2.TextStrokeTransparency = 0.5
+    distance2.Font = Enum.Font.BuilderSans
+    distance2.TextSize = 11
+    distance2.Parent = frame33
+
+    local frame34 = Instance.new("Frame")
+    frame34.Position = UDim2.fromOffset(-8, 0)
+    frame34.Size = UDim2.fromOffset(4, 35)
+    frame34.BackgroundColor3 = Color3.fromRGB(45, 45, 50)
+    frame34.BorderSizePixel = 0
+    frame34.Parent = frame33
+
+    local frame35 = Instance.new("Frame")
+    frame35.AnchorPoint = Vector2.new(0, 1)
+    frame35.Position = UDim2.fromScale(0, 1)
+    frame35.Size = UDim2.fromScale(1, 1)
+    frame35.BackgroundColor3 = Color3.fromRGB(70, 220, 110)
+    frame35.BorderSizePixel = 0
+    frame35.Parent = frame34
+
+    v16[p122] = {
+      Highlight = playerToolBox,
+      Billboard = playerToolTag,
+      Name = name2,
+      Distance = distance2,
+      HealthBackground = frame34,
+      HealthFill = frame35,
+    }
+
+    return
+  end
+end
+
+for index20, value23 in ipairs(players:GetPlayers()) do
+  f78(value23)
+end
+
+f7(players.PlayerAdded, f78)
+f7(players.PlayerRemoving, f77)
+
+f7(runService.RenderStepped, function()
+  if not v5 then
+    return
+  end
+
+  currentCamera4 = v1.CurrentCamera
+
+  if not currentCamera4 then
+    return
+  else
+    local viewportSize5 = currentCamera4.ViewportSize
+
+    fovCircle.Position = UDim2.fromOffset(viewportSize5.X / 2, viewportSize5.Y / 2)
+    fovCircle.Size = UDim2.fromOffset(v13.FOVSize * 2, v13.FOVSize * 2)
+    fovCircle.Visible = v13.FOVEnabled and v13.TrackingEnabled
+
+    if v13.TrackingEnabled then
+      local v164 = f11()
+
+      if v164 then
+        local v165 = f6(v164)
+
+        if v165 then
+          local v166 = f5(v165)
+
+          if v166 then
+            local cframe3 = CFrame.lookAt(currentCamera4.CFrame.Position, v166.Position)
+            local v167 = math.clamp(v13.Smoothness, 0.1, 0.9)
+            currentCamera4.CFrame = currentCamera4.CFrame:Lerp(cframe3, v167)
+          end
+        end
+      end
+    end
+
+    for key5, value24 in pairs(v16) do
+      local v168, v169, v170 = f6(key5)
+
+      if v13.ESPEnabled and v168 then
+        local boxColor = v13.BoxColor
+
+        if value24.Highlight then
+          value24.Highlight.Adornee = v168
+          value24.Highlight.OutlineColor = boxColor
+          value24.Highlight.Enabled = v13.BoxESP
+        end
+
+        if value24.Billboard then
+          local billboard = value24.Billboard
+          billboard.Adornee = v168:FindFirstChild("Head") or v170
+
+          local billboard2 = value24.Billboard
+          billboard2.Enabled = v13.NameTags or v13.Distance or v13.HealthBar
+        end
+
+        if value24.Name then
+          value24.Name.Visible = v13.NameTags
+          value24.Name.Text = key5.DisplayName
+          value24.Name.TextColor3 = boxColor
+        end
+
+        if value24.Distance then
+          value24.Distance.Visible = v13.Distance
+          local character16 = localPlayer.Character
+
+          local humanoidRootPart7 = character16
+            and character16:FindFirstChild("HumanoidRootPart")
+
+          if humanoidRootPart7 then
+            value24.Distance.Text = string.format("%d m", math.floor((humanoidRootPart7.Position
+                - v170.Position).Magnitude
+              + 0.5))
+          else
+            value24.Distance.Text = ""
+          end
+        end
+
+        if value24.HealthBackground and value24.HealthFill then
+          value24.HealthBackground.Visible = v13.HealthBar
+          value24.HealthFill.Visible = v13.HealthBar
+
+          local v171 = math.clamp(v169.Health / math.max(v169.MaxHealth, 1), 0, 1)
+
+          value24.HealthFill.Size = UDim2.new(1, 0, v171, 0)
+
+          value24.HealthFill.BackgroundColor3 = Color3.fromRGB(
+            70 + (1 - v171) * 185, 220 * v171, 80
+          )
+        end
+      else
+        if value24.Highlight then
+          value24.Highlight.Enabled = false
+        end
+
+        if value24.Billboard then
+          value24.Billboard.Enabled = false
+        end
+      end
+    end
+
+    return
+  end
+end)
+
+f7(aimToggle.MouseButton1Click, function()
+  if v34 then
+    v34 = false
+    return
+  end
+
+  f32(not v13.TrackingEnabled)
+end)
+
+local menuReopenButton = Instance.new("ImageButton")
+menuReopenButton.Name = "MenuReopenButton"
+menuReopenButton.AnchorPoint = Vector2.new(1, 1)
+menuReopenButton.Position = UDim2.new(1, -18, 1, -18)
+menuReopenButton.Size = UDim2.fromOffset(52, 52)
+menuReopenButton.BackgroundTransparency = 1
+menuReopenButton.Image = "rbxassetid://110688253549566"
+menuReopenButton.ScaleType = Enum.ScaleType.Fit
+menuReopenButton.Visible = false
+menuReopenButton.ZIndex = 1000
+menuReopenButton.Parent = playerVisualizationTool2
+
+Instance.new("UICorner", menuReopenButton).CornerRadius = UDim.new(0, 12)
+local v172 = false
+local v173 = false
+local position18, position19
+
+f7(menuReopenButton.InputBegan, function(p123)
+  local v174 = p123.UserInputType == Enum.UserInputType.MouseButton1
+    or p123.UserInputType == Enum.UserInputType.Touch
+
+  local connect5
+
+  if v174 then
+    v172 = true
+    v173 = false
+    position18 = p123.Position
+    position19 = menuReopenButton.Position
+
+    connect5 = nil
+
+    connect5 = p123.Changed:Connect(function()
+      if p123.UserInputState == Enum.UserInputState.End then
+        v172 = false
+        connect5:Disconnect()
+      end
+    end)
+  end
+end)
+
+f7(userInputService.InputChanged, function(p124)
+  if v172
+    and (p124.UserInputType == Enum.UserInputType.MouseMovement
+      or p124.UserInputType == Enum.UserInputType.Touch) then
+    local v175 = p124.Position - position18
+
+    if math.abs(v175.X) > 4 or math.abs(v175.Y) > 4 then
+      v173 = true
+    end
+
+    local udim4 = UDim2.new(
+      position19.X.Scale, position19.X.Offset + v175.X, position19.Y.Scale,
+      position19.Y.Offset + v175.Y
+    )
+
+    menuReopenButton.Position = menuReopenButton.Position:Lerp(udim4, 0.32)
+  end
+end)
+
+local function f79()
+  mainWindow.Visible = true
+  menuReopenButton.Visible = false
+end
+
+local function f80()
+  mainWindow.Visible = false
+  menuReopenButton.Visible = true
+end
+
+f7(menuReopenButton.Activated, function()
+  if v173 then
+    v173 = false
+    return
+  end
+
+  f79()
+end)
+
+f7(menuReopenButton.MouseButton1Click, function()
+  if v173 then
+    v173 = false
+    return
+  end
+
+  f79()
+end)
+
+local findFirstChild = mainWindow:FindFirstChild("HideButton", true)
+  or mainWindow:FindFirstChild("MinimizeButton", true)
+  or mainWindow:FindFirstChild("MinusButton", true)
+
+if findFirstChild and findFirstChild:IsA("GuiButton") then
+  f7(findFirstChild.Activated, function() f80() end)
+end
+
+-- The key UI is created before the main GUI and the main ScreenGui starts disabled.
+-- Enable it once the full GUI has finished being constructed and access was granted.
+if v5 then
+  playerVisualizationTool2.Enabled = true
+end
